@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditarLibro"></activity>
+        <activity android:name=".VisualizarEsteLibro"></activity>
+        <activity android:name=".VisualizarLibros" />
+        <activity android:name=".EditarEsteLibro" />
+        <activity android:name=".EditarLibro" />
         <activity android:name=".CrearLibro" />
         <activity android:name=".ActividadMenu2" />
         <activity android:name=".ActividadCrearCuenta" />
