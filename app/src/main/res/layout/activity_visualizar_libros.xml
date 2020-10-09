@@ -26,6 +26,7 @@
             android:layout_weight="1"
             android:backgroundTint="#4CAF50"
             android:fontFamily="@font/cherry_swash"
+            android:onClick="visualizarLibro"
             android:text="Visualizar Libro" />
 
     </LinearLayout>
