@@ -32,4 +32,23 @@ class ActividadMenu2 : AppCompatActivity() {
 
         startActivity(intentEditar)
     }
+    fun visualizarClicked(view: View){
+        val intentVisualizar = Intent(this, VisualizarLibros::class.java).apply {
+
+        }
+        startActivity(intentVisualizar)
+    }
+    fun usuarioClicked(view: View){
+        val intentUsuario = Intent(this, InfoUsuario::class.java).apply {
+
+        }
+        startActivity(intentUsuario)
+    }
+    fun ayudaClicked(view:View){
+        val intentAyuda = Intent(this, Ayuda::class.java).apply {
+
+        }
+        startActivity(intentAyuda)
+    }
+
 }
