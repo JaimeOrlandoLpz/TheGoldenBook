@@ -5,7 +5,7 @@
     android:id="@+id/campoUsername"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8800BCD4"
+    android:background="@drawable/gradient"
     tools:context=".ActividadLogin">
 
     <TextView
@@ -77,15 +77,15 @@
 
     <Button
         android:id="@+id/botonLogin2"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="150dp"
+        android:layout_height="75dp"
         android:layout_marginStart="106dp"
         android:layout_marginTop="54dp"
         android:layout_marginEnd="106dp"
-        android:background="#4CAF50"
+        android:background="@drawable/botonovalo"
         android:fontFamily="@font/cherry_swash"
         android:onClick="loginClicked"
-        android:text="Login"
+        android:text="ACCEDER"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
