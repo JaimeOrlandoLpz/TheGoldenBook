@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8800BCD4"
+    android:background="@drawable/gradient"
     android:onClick="editarLibro"
     tools:context=".EditarLibro">
 
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="#4CAF50"
+            android:background="@drawable/botonovalo"
             android:fontFamily="@font/cherry_swash"
             android:onClick="editarLibro"
             android:text="Editar Libro" />
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="#4CAF50"
+            android:background="@drawable/botonovalo"
             android:fontFamily="@font/cherry_swash"
             android:text="Eliminar Libro" />
     </LinearLayout>
