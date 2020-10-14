@@ -26,4 +26,12 @@ class ActividadMenu1 : AppCompatActivity() {
 
         startActivity(intentReg)
     }
+
+    fun acercaClick(view: View) {
+        val intentReg = Intent(this, Ayuda::class.java).apply {
+
+        }
+
+        startActivity(intentReg)
+    }
 }
