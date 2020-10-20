@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navegacion"
+    app:startDestination="@id/actividadMenu1">
+
+    <activity
+        android:id="@+id/actividadMenu1"
+        android:name="mx.itesm.Legacy.TheGoldenBook.ActividadMenu1"
+        android:label="activity_menu1"
+        tools:layout="@layout/activity_menu1" >
+        <action
+            android:id="@+id/action_actividadMenu1_to_actividadLogin"
+            app:destination="@id/actividadLogin" />
+        <action
+            android:id="@+id/action_actividadMenu1_to_actividadCrearCuenta"
+            app:destination="@id/actividadCrearCuenta" />
+        <action
+            android:id="@+id/action_actividadMenu1_to_ayuda"
+            app:destination="@id/ayuda" />
+    </activity>
+    <activity
+        android:id="@+id/actividadCrearCuenta"
+        android:name="mx.itesm.Legacy.TheGoldenBook.ActividadCrearCuenta"
+        android:label="activity_crear_cuenta"
+        tools:layout="@layout/activity_crear_cuenta" >
+        <action
+            android:id="@+id/action_actividadCrearCuenta_to_actividadMenu2"
+            app:destination="@id/actividadMenu2" />
+    </activity>
+    <activity
+        android:id="@+id/actividadLogin"
+        android:name="mx.itesm.Legacy.TheGoldenBook.ActividadLogin"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" >
+        <action
+            android:id="@+id/action_actividadLogin_to_actividadMenu2"
+            app:destination="@id/actividadMenu2" />
+    </activity>
+    <activity
+        android:id="@+id/ayuda"
+        android:name="mx.itesm.Legacy.TheGoldenBook.Ayuda"
+        android:label="activity_ayuda"
+        tools:layout="@layout/activity_ayuda" />
+    <activity
+        android:id="@+id/actividadMenu2"
+        android:name="mx.itesm.Legacy.TheGoldenBook.ActividadMenu2"
+        android:label="activity_menu2"
+        tools:layout="@layout/activity_menu2" >
+        <action
+            android:id="@+id/action_actividadMenu2_to_crearLibro"
+            app:destination="@id/crearLibro" />
+        <action
+            android:id="@+id/action_actividadMenu2_to_editarLibro"
+            app:destination="@id/editarLibro" />
+        <action
+            android:id="@+id/action_actividadMenu2_to_visualizarLibros"
+            app:destination="@id/visualizarLibros" />
+        <action
+            android:id="@+id/action_actividadMenu2_to_infoUsuario"
+            app:destination="@id/infoUsuario" />
+    </activity>
+    <activity
+        android:id="@+id/crearLibro"
+        android:name="mx.itesm.Legacy.TheGoldenBook.CrearLibro"
+        android:label="activity_crear_libro"
+        tools:layout="@layout/activity_crear_libro" />
+    <activity
+        android:id="@+id/editarLibro"
+        android:name="mx.itesm.Legacy.TheGoldenBook.EditarLibro"
+        android:label="activity_editar_libro"
+        tools:layout="@layout/activity_editar_libro" >
+        <action
+            android:id="@+id/action_editarLibro_to_editarEsteLibro"
+            app:destination="@id/editarEsteLibro" />
+    </activity>
+    <activity
+        android:id="@+id/editarEsteLibro"
+        android:name="mx.itesm.Legacy.TheGoldenBook.EditarEsteLibro"
+        android:label="activity_editar_este_libro"
+        tools:layout="@layout/activity_editar_este_libro" />
+    <activity
+        android:id="@+id/visualizarLibros"
+        android:name="mx.itesm.Legacy.TheGoldenBook.VisualizarLibros"
+        android:label="activity_visualizar_libros"
+        tools:layout="@layout/activity_visualizar_libros" >
+        <action
+            android:id="@+id/action_visualizarLibros_to_visualizarEsteLibro"
+            app:destination="@id/visualizarEsteLibro" />
+    </activity>
+    <activity
+        android:id="@+id/visualizarEsteLibro"
+        android:name="mx.itesm.Legacy.TheGoldenBook.VisualizarEsteLibro"
+        android:label="activity_visualizar_este_libro"
+        tools:layout="@layout/activity_visualizar_este_libro" />
+    <activity
+        android:id="@+id/infoUsuario"
+        android:name="mx.itesm.Legacy.TheGoldenBook.InfoUsuario"
+        android:label="activity_info_usuario"
+        tools:layout="@layout/activity_info_usuario" />
+</navigation>
