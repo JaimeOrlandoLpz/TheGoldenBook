@@ -5,21 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".ActividadMenu1" >
+    tools:context=".ActividadMenu1">
 
     <Button
         android:id="@+id/btnAcercaDe"
         android:layout_width="220dp"
         android:layout_height="60dp"
         android:layout_marginStart="162dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="162dp"
         android:background="@drawable/botonovalo"
         android:onClick="acercaClick"
         android:text="ACERCA DE"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnCrearCuenta"
         tools:text="ACERCA DE" />
@@ -88,15 +89,18 @@
         android:layout_width="220dp"
         android:layout_height="60dp"
         android:layout_marginStart="162dp"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="162dp"
         android:background="@drawable/botonovalo"
         android:onClick="loginClicked"
         android:text="INGRESAR"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCrearCuenta"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_chainStyle="packed"
         tools:text="INGRESAR" />
 
     <Button
@@ -104,14 +108,15 @@
         android:layout_width="220dp"
         android:layout_height="60dp"
         android:layout_marginStart="162dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="162dp"
         android:background="@drawable/botonovalo"
         android:onClick="registroClick"
         android:text="CREAR CUENTA"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAcercaDe"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         tools:text="CREAR CUENTA" />

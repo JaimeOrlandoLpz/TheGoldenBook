@@ -7,6 +7,22 @@
     android:background="@drawable/gradient"
     tools:context=".CrearLibro">
 
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="32dp"
+        android:layout_weight="1"
+        android:background="@drawable/botonovalo"
+        android:fontFamily="@font/cherry_swash"
+        android:onClick="grabarDatos"
+        android:text="Guardar Libro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="1.0" />
+
     <TextView
         android:id="@+id/tvTituloLibro"
         android:layout_width="0dp"
@@ -38,22 +54,6 @@
             android:layout_height="wrap_content"
             android:hint="Titulo del Libro" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="125dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="32dp"
-        android:layout_weight="1"
-        android:background="@drawable/botonovalo"
-        android:fontFamily="@font/cherry_swash"
-        android:onClick="grabarDatos"
-        android:text="Guardar Libro"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
