@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="acerca_de">Acerca de</string>
+    <string name="app_title">The Golden Book</string>
 </resources>

@@ -1,12 +1,11 @@
 package mx.itesm.Legacy.TheGoldenBook
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
+import androidx.appcompat.app.AppCompatActivity
 
 class ActividadMenu1 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +34,16 @@ class ActividadMenu1 : AppCompatActivity() {
         }
 
         startActivity(intentReg)
+    }
+
+    fun mailOnClick(v: View){
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/html"
+        intent.putExtra(Intent.EXTRA_EMAIL, "thegoldenbookproject@gmail.com")
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Subject")
+        intent.putExtra(Intent.EXTRA_TEXT, "Mensaje")
+
+        startActivity(Intent.createChooser(intent, "Enviar"))
     }
 
 
