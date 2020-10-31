@@ -3,13 +3,18 @@ package mx.itesm.Legacy.TheGoldenBook
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
+import androidx.annotation.Nullable
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_editar_libro.*
 
 class EditarLibro : AppCompatActivity(), ClickListener {
     private val editarLibroController : EditarLibroController = EditarLibroController()
     lateinit var arrLibros: Array<Libro>
+    private val PICK_IMAGE_MULTIPLE  = 1
+    lateinit var strImgaeEncode : String
+    var lststrImageEncode = mutableListOf<String>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +27,7 @@ class EditarLibro : AppCompatActivity(), ClickListener {
     private fun configurarRecycleView() {
         val admLayout =LinearLayoutManager(this)
 
-        arrLibros = editarLibroController.getArrLibrosBD("")
+        arrLibros = editarLibroController.getArrLibrosBD("", this)
 
         val adaptador= AdaptadorListaLibros(arrLibros)
 
@@ -42,5 +47,32 @@ class EditarLibro : AppCompatActivity(), ClickListener {
         }
 
         startActivity(intentEditar)
+    }
+
+    fun actualizarAdaptador(lsLibros: MutableList<Libro>) {
+        val arrLibros = lsLibros.toTypedArray()
+        val adaptador= AdaptadorListaLibros(arrLibros)
+
+        rvLibros.adapter = adaptador
+        adaptador.notifyDataSetChanged()
+        adaptador.listener = this
+    }
+
+    fun selectImgsGallery(v: View){
+        intent = Intent()
+        intent.setType("image/*").putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+        intent.setAction(Intent.ACTION_GET_CONTENT)
+
+        startActivityForResult(Intent.createChooser(intent, "Seleccionar Imágenes"), PICK_IMAGE_MULTIPLE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == RESULT_OK && data != null){
+            var arrstrFilePath : Array<String> = arrayOf( MediaStore.Images.Media._ID)
+        }
+
+
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

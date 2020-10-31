@@ -7,7 +7,7 @@ import com.google.firebase.database.ValueEventListener
 
 class EditarLibroController {
 
-     fun getArrLibrosBD(idUsuario : String) : Array<Libro>{
+     fun getArrLibrosBD(idUsuario : String, actividad : EditarLibro) : Array<Libro>{
 
          val baseDatos = FirebaseDatabase.getInstance()
          val referencia = baseDatos.getReference("/Libro")
@@ -24,6 +24,9 @@ class EditarLibroController {
                         lsLibros.add(libro)
                     }
                  }
+                 //Avisar al adaptador que los datos cambiaron
+
+                 actividad.actualizarAdaptador(lsLibros)
              }
 
              override fun onCancelled(error: DatabaseError) {
