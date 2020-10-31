@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name" translatable="false">TheGoldenBook</string>
     <string name="acerca_de">Acerca de</string>
     <string name="app_title">The Golden Book</string>
     <string name="librero">Librero</string>
+    <string name="titleGaleria">Galería</string>
+    <string name="titleOpen">Ver</string>
+    <string name="titleEdit">Editar</string>
+    <string name="titleDelete">Borrar</string>
 </resources>

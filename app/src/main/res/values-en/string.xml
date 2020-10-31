@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="acerca_de">Acerca de</string>
+    <string name="app_title">The Golden Book</string>
+    <string name="librero">Librero</string>
+    <string name="titleGaleria">Gallery</string>
+    <string name="titleOpen">Open</string>
+    <string name="titleEdit">Edit</string>
+    <string name="titleDelete">Delete</string>
+</resources>

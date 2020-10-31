@@ -46,11 +46,11 @@ class EditarLibro : AppCompatActivity(), ClickListener {
     }
 
     fun editarLibro(v : View){
-        val intentEditar = Intent(this, EditarEsteLibro:: class.java).apply {
+        val intentGaleria = Intent(this, AlbumsActivity:: class.java).apply {
 
         }
 
-        startActivity(intentEditar)
+        startActivity(intentGaleria)
     }
 
     fun actualizarAdaptador(lsLibros: MutableList<Libro>) {

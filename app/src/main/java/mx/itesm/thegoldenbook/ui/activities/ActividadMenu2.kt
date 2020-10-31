@@ -26,12 +26,12 @@ class ActividadMenu2 : AppCompatActivity() {
         startActivity(intentCrearNuevo)
     }
 
-    fun editarClicked(view: View){
-        val intentEditar = Intent(this, EditarLibro::class.java).apply {
+    fun galeriaClicked(view: View){
+        val intentGaleria = Intent(this, AlbumsActivity::class.java).apply {
 
         }
 
-        startActivity(intentEditar)
+        startActivity(intentGaleria)
     }
     fun visualizarClicked(view: View){
         val intentVisualizar = Intent(this, VisualizarLibros::class.java).apply {

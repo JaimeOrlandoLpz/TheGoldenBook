@@ -5,9 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import mx.itesm.thegoldenbook.R
+import mx.itesm.thegoldenbook.interfaces.ItemListener
+import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.ui.viewholders.AlbumHolder
 
-class AlbumsAdapter: RecyclerView.Adapter<AlbumHolder>() {
+class AlbumsAdapter(
+    private val list: ArrayList<Album>,
+    private val listener: ItemListener<Album>
+): RecyclerView.Adapter<AlbumHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_content_album, parent, false)
@@ -15,12 +20,30 @@ class AlbumsAdapter: RecyclerView.Adapter<AlbumHolder>() {
     }
 
     override fun onBindViewHolder(holder: AlbumHolder, position: Int) {
-        holder.tvAlbumTitle.text = "Album posición $position"
+        val item: Album = list[position]
 
-        holder.ivAlbum.setImageResource(R.drawable.icono_libro)
+        holder.tvAlbumTitle.text = item.title
+
+        holder.ivAlbum.setImageResource(item.cover)
+
+        holder.cvContainer.setOnClickListener {
+            listener.onItemSelected(it, item)
+        }
+
+        holder.btnVer.setOnClickListener {
+            listener.onItemSelected(it, item)
+        }
+
+        holder.btnEditar.setOnClickListener {
+            listener.onItemSelected(it, item)
+        }
+
+        holder.btnBorrar.setOnClickListener {
+            listener.onItemSelected(it, item)
+        }
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return list.size
     }
 }
