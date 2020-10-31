@@ -1,25 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="mx.itesm.thegoldenbook">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_title"
+        android:fullBackupContent="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.GaleriaLibros"></activity>
-        <activity android:name=".ui.activities.Ayuda" />
-        <activity android:name=".ui.activities.InfoUsuario" />
-        <activity android:name=".ui.activities.VisualizarEsteLibro" />
-        <activity android:name=".ui.activities.VisualizarLibros" />
-        <activity android:name=".ui.activities.EditarEsteLibro" />
-        <activity android:name=".ui.activities.EditarLibro" />
-        <activity android:name=".ui.activities.CrearLibro" />
-        <activity android:name=".ui.activities.ActividadMenu2" />
-        <activity android:name=".ui.activities.ActividadCrearCuenta" />
-        <activity android:name=".ui.activities.ActividadLogin" />
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
+
+        <activity
+            android:name=".ui.activities.GaleriaLibros"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.activities.Ayuda"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.activities.InfoUsuario"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.activities.VisualizarEsteLibro"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.activities.VisualizarLibros"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.activities.EditarEsteLibro"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.activities.EditarLibro"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.activities.CrearLibro"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".ui.activities.ActividadMenu2"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".ui.activities.ActividadCrearCuenta"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".ui.activities.ActividadLogin"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".ui.activities.AlbumsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
         <activity android:name=".ui.activities.ActividadMenu1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
