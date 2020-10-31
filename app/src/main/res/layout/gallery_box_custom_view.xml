@@ -39,19 +39,19 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/imageButton7"
+                android:id="@+id/btn1"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 app:srcCompat="@drawable/botonovalo" />
 
             <ImageButton
-                android:id="@+id/imageButton8"
+                android:id="@+id/btn2"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 app:srcCompat="@drawable/botonovalo" />
 
             <ImageButton
-                android:id="@+id/imageButton9"
+                android:id="@+id/btn3"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 app:srcCompat="@drawable/botonovalo" />
