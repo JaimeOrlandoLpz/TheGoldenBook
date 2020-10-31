@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_crear_cuenta.*
 
 
 class ActividadLogin : AppCompatActivity() {
+    var flag = 0
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +32,9 @@ class ActividadLogin : AppCompatActivity() {
 
     }
 
-    fun signIn(correo: String, paswword: String){
-        mAuth.signInWithEmailAndPassword(correo, password.toString())
+    fun signIn(correo: String, password: String){
+
+        mAuth.signInWithEmailAndPassword(correo, password)
             .addOnCompleteListener(
                 this
             ) { task ->
@@ -41,14 +43,16 @@ class ActividadLogin : AppCompatActivity() {
                     println("signInWithEmail:success")
                     val user = mAuth.currentUser
                     updateUI(user)
+                    flag = 1
                 } else {
                     // If sign in fails, display a message to the user.
                     println("signInWithEmail:failure")
                     Toast.makeText(
-                        this@ActividadLogin, "Authentication failed.",
+                        this@ActividadLogin, "Usuario o contraseña incorrectos.",
                         Toast.LENGTH_SHORT
                     ).show()
                     updateUI(null)
+                    flag = 2
                 }
 
                 // ...
@@ -64,7 +68,14 @@ class ActividadLogin : AppCompatActivity() {
         //val passwordConfirmar = editTextTextPasswordConfirm.text.toString();
 
         signIn(correo, password)
+        if(flag == 1){
+            startActivity(intentMenu)
+            flag= 0
+        }else{
+            println("Error al ingresar")
+            flag = 0
+        }
 
-        startActivity(intentMenu)
+
     }
 }
