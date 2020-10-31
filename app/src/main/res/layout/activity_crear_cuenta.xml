@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".ActividadCrearCuenta">
+    tools:context=".ui.activities.ActividadCrearCuenta">
 
     <Button
         android:id="@+id/button2"

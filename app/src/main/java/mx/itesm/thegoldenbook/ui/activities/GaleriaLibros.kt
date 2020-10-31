@@ -1,9 +1,10 @@
-package mx.itesm.Legacy.TheGoldenBook
+package mx.itesm.thegoldenbook.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ListView
 import kotlinx.android.synthetic.main.activity_galeria_libros.*
+import mx.itesm.thegoldenbook.ui.adapters.GalleryAdapter
+import mx.itesm.thegoldenbook.R
 
 
 class GaleriaLibros : AppCompatActivity() {

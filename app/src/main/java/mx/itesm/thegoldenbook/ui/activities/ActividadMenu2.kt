@@ -4,12 +4,13 @@
 
 
 
-package mx.itesm.Legacy.TheGoldenBook
+package mx.itesm.thegoldenbook.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import mx.itesm.thegoldenbook.*
 
 class ActividadMenu2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

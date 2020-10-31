@@ -1,4 +1,4 @@
-package mx.itesm.Legacy.TheGoldenBook
+package mx.itesm.thegoldenbook.interfaces
 
 interface ClickListener {
     fun clicked(posicion : Int)

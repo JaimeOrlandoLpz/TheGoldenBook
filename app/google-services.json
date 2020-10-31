@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "200399229679",
+    "firebase_url": "https://goldenbook-3ae2f.firebaseio.com",
+    "project_id": "goldenbook-3ae2f",
+    "storage_bucket": "goldenbook-3ae2f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200399229679:android:95813777079440a473c11a",
+        "android_client_info": {
+          "package_name": "mx.itesm.thegoldenbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200399229679-qm6lp675dfilelmlm54itonmlbncncep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKFbHeWZI3t63HOjxwoDbAgZVVC7PRicc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200399229679-qm6lp675dfilelmlm54itonmlbncncep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200399229679:android:c7858b9aa8c70a8773c11a",
+        "android_client_info": {
+          "package_name": "mx.itesm.thegoldenbook.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200399229679-qm6lp675dfilelmlm54itonmlbncncep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKFbHeWZI3t63HOjxwoDbAgZVVC7PRicc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200399229679-qm6lp675dfilelmlm54itonmlbncncep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200399229679:android:053023a4cc0e8e3f73c11a",
+        "android_client_info": {
+          "package_name": "mx.itesm.thegoldenbook.qa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200399229679-qm6lp675dfilelmlm54itonmlbncncep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKFbHeWZI3t63HOjxwoDbAgZVVC7PRicc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200399229679-qm6lp675dfilelmlm54itonmlbncncep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

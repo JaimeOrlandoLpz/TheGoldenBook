@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="mx.itesm.Legacy.TheGoldenBook">
+    package="mx.itesm.thegoldenbook">
 
     <application
         android:allowBackup="true"
@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GaleriaLibros"></activity>
-        <activity android:name=".Ayuda" />
-        <activity android:name=".InfoUsuario" />
-        <activity android:name=".VisualizarEsteLibro" />
-        <activity android:name=".VisualizarLibros" />
-        <activity android:name=".EditarEsteLibro" />
-        <activity android:name=".EditarLibro" />
-        <activity android:name=".CrearLibro" />
-        <activity android:name=".ActividadMenu2" />
-        <activity android:name=".ActividadCrearCuenta" />
-        <activity android:name=".ActividadLogin" />
-        <activity android:name=".ActividadMenu1">
+        <activity android:name=".ui.activities.GaleriaLibros"></activity>
+        <activity android:name=".ui.activities.Ayuda" />
+        <activity android:name=".ui.activities.InfoUsuario" />
+        <activity android:name=".ui.activities.VisualizarEsteLibro" />
+        <activity android:name=".ui.activities.VisualizarLibros" />
+        <activity android:name=".ui.activities.EditarEsteLibro" />
+        <activity android:name=".ui.activities.EditarLibro" />
+        <activity android:name=".ui.activities.CrearLibro" />
+        <activity android:name=".ui.activities.ActividadMenu2" />
+        <activity android:name=".ui.activities.ActividadCrearCuenta" />
+        <activity android:name=".ui.activities.ActividadLogin" />
+        <activity android:name=".ui.activities.ActividadMenu1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

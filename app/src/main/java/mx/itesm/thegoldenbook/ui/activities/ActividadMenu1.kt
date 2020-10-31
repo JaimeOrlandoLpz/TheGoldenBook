@@ -1,4 +1,4 @@
-package mx.itesm.Legacy.TheGoldenBook
+package mx.itesm.thegoldenbook.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import mx.itesm.thegoldenbook.R
 
 class ActividadMenu1 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

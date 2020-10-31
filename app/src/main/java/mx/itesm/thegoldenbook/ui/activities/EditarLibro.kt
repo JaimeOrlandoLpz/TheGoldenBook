@@ -1,13 +1,17 @@
-package mx.itesm.Legacy.TheGoldenBook
+package mx.itesm.thegoldenbook.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
-import androidx.annotation.Nullable
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_editar_libro.*
+import mx.itesm.thegoldenbook.EditarLibroController
+import mx.itesm.thegoldenbook.models.Libro
+import mx.itesm.thegoldenbook.R
+import mx.itesm.thegoldenbook.interfaces.ClickListener
+import mx.itesm.thegoldenbook.ui.adapters.AdaptadorListaLibros
 
 class EditarLibro : AppCompatActivity(), ClickListener {
     private val editarLibroController : EditarLibroController = EditarLibroController()

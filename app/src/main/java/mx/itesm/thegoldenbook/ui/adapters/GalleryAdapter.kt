@@ -1,4 +1,4 @@
-package mx.itesm.Legacy.TheGoldenBook
+package mx.itesm.thegoldenbook.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.gallery_box_custom_view.*
+import mx.itesm.thegoldenbook.R
 
 class GalleryAdapter :  RecyclerView.Adapter<GalleryAdapter.ViewHolder>(){
     var data = listOf<ViewHolder>()

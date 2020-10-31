@@ -7,7 +7,7 @@
 
     <activity
         android:id="@+id/actividadMenu1"
-        android:name="mx.itesm.Legacy.TheGoldenBook.ActividadMenu1"
+        android:name="mx.itesm.thegoldenbook.ui.activities.ActividadMenu1"
         android:label="activity_menu1"
         tools:layout="@layout/activity_menu1" >
         <action
@@ -22,7 +22,7 @@
     </activity>
     <activity
         android:id="@+id/actividadCrearCuenta"
-        android:name="mx.itesm.Legacy.TheGoldenBook.ActividadCrearCuenta"
+        android:name="mx.itesm.thegoldenbook.ui.activities.ActividadCrearCuenta"
         android:label="activity_crear_cuenta"
         tools:layout="@layout/activity_crear_cuenta" >
         <action
@@ -31,7 +31,7 @@
     </activity>
     <activity
         android:id="@+id/actividadLogin"
-        android:name="mx.itesm.Legacy.TheGoldenBook.ActividadLogin"
+        android:name="mx.itesm.thegoldenbook.ui.activities.ActividadLogin"
         android:label="activity_login"
         tools:layout="@layout/activity_login" >
         <action
@@ -40,12 +40,12 @@
     </activity>
     <activity
         android:id="@+id/ayuda"
-        android:name="mx.itesm.Legacy.TheGoldenBook.Ayuda"
+        android:name="mx.itesm.thegoldenbook.ui.activities.Ayuda"
         android:label="activity_ayuda"
         tools:layout="@layout/activity_ayuda" />
     <activity
         android:id="@+id/actividadMenu2"
-        android:name="mx.itesm.Legacy.TheGoldenBook.ActividadMenu2"
+        android:name="mx.itesm.thegoldenbook.ui.activities.ActividadMenu2"
         android:label="activity_menu2"
         tools:layout="@layout/activity_menu2" >
         <action
@@ -63,12 +63,12 @@
     </activity>
     <activity
         android:id="@+id/crearLibro"
-        android:name="mx.itesm.Legacy.TheGoldenBook.CrearLibro"
+        android:name="mx.itesm.thegoldenbook.ui.activities.CrearLibro"
         android:label="activity_crear_libro"
         tools:layout="@layout/activity_crear_libro" />
     <activity
         android:id="@+id/editarLibro"
-        android:name="mx.itesm.Legacy.TheGoldenBook.EditarLibro"
+        android:name="mx.itesm.thegoldenbook.ui.activities.EditarLibro"
         android:label="activity_editar_libro"
         tools:layout="@layout/activity_editar_libro" >
         <action
@@ -77,12 +77,12 @@
     </activity>
     <activity
         android:id="@+id/editarEsteLibro"
-        android:name="mx.itesm.Legacy.TheGoldenBook.EditarEsteLibro"
+        android:name="mx.itesm.thegoldenbook.ui.activities.EditarEsteLibro"
         android:label="activity_editar_este_libro"
         tools:layout="@layout/activity_editar_este_libro" />
     <activity
         android:id="@+id/visualizarLibros"
-        android:name="mx.itesm.Legacy.TheGoldenBook.VisualizarLibros"
+        android:name="mx.itesm.thegoldenbook.ui.activities.VisualizarLibros"
         android:label="activity_visualizar_libros"
         tools:layout="@layout/activity_visualizar_libros" >
         <action
@@ -91,12 +91,12 @@
     </activity>
     <activity
         android:id="@+id/visualizarEsteLibro"
-        android:name="mx.itesm.Legacy.TheGoldenBook.VisualizarEsteLibro"
+        android:name="mx.itesm.thegoldenbook.ui.activities.VisualizarEsteLibro"
         android:label="activity_visualizar_este_libro"
         tools:layout="@layout/activity_visualizar_este_libro" />
     <activity
         android:id="@+id/infoUsuario"
-        android:name="mx.itesm.Legacy.TheGoldenBook.InfoUsuario"
+        android:name="mx.itesm.thegoldenbook.ui.activities.InfoUsuario"
         android:label="activity_info_usuario"
         tools:layout="@layout/activity_info_usuario" />
 </navigation>

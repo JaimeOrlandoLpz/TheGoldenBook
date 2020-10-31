@@ -1,11 +1,12 @@
-package mx.itesm.Legacy.TheGoldenBook
+package mx.itesm.thegoldenbook.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import mx.itesm.thegoldenbook.R
 
-class Ayuda : AppCompatActivity() {
+class InfoUsuario : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ayuda)
+        setContentView(R.layout.activity_info_usuario)
     }
 }

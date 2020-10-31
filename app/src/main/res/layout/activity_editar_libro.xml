@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:onClick="editarLibro"
-    tools:context=".EditarLibro">
+    tools:context=".ui.activities.EditarLibro">
 
     <LinearLayout
         android:id="@+id/linearLayout"

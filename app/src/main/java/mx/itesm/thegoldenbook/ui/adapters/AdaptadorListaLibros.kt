@@ -1,10 +1,13 @@
-package mx.itesm.Legacy.TheGoldenBook
+package mx.itesm.thegoldenbook.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.renglon_libro.view.*
+import mx.itesm.thegoldenbook.models.Libro
+import mx.itesm.thegoldenbook.R
+import mx.itesm.thegoldenbook.interfaces.ClickListener
 
 class AdaptadorListaLibros(private val arrLibros: Array<Libro>) :
     RecyclerView.Adapter<AdaptadorListaLibros.VistaRenglon>() {

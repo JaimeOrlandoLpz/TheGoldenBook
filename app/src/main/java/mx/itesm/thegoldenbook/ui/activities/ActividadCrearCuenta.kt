@@ -1,6 +1,5 @@
-package mx.itesm.Legacy.TheGoldenBook
+package mx.itesm.thegoldenbook.ui.activities
 
-import android.R.attr.password
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,17 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_crear_cuenta.*
+import mx.itesm.thegoldenbook.R
 
 
-class ActividadLogin : AppCompatActivity() {
-    var flag = 0
+class ActividadCrearCuenta : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_crear_cuenta)
+        mAuth = FirebaseAuth.getInstance()
 
-        mAuth = FirebaseAuth.getInstance();
     }
 
     override fun onStart() {
@@ -29,37 +27,37 @@ class ActividadLogin : AppCompatActivity() {
     }
 
     private fun updateUI(currentUser: FirebaseUser?) {
-
+        if(currentUser != null) {
+            println("Usuario: ${currentUser?.displayName}")
+        }else{
+            println("No has hecho login")
+        }
     }
 
-    fun signIn(correo: String, password: String){
-
-        mAuth.signInWithEmailAndPassword(correo, password)
+    fun createAccount(correo: String, password: String){
+        mAuth.createUserWithEmailAndPassword(correo, password)
             .addOnCompleteListener(
                 this
             ) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    println("signInWithEmail:success")
+                    println("createUserWithEmail:success")
                     val user = mAuth.currentUser
                     updateUI(user)
-                    flag = 1
                 } else {
                     // If sign in fails, display a message to the user.
-                    println("signInWithEmail:failure")
+                    println("createUserWithEmail:failure ${task.exception}")
                     Toast.makeText(
-                        this@ActividadLogin, "Usuario o contraseña incorrectos.",
+                        this@ActividadCrearCuenta, "Authentication failed.",
                         Toast.LENGTH_SHORT
                     ).show()
                     updateUI(null)
-                    flag = 2
                 }
 
-                // ...
             }
     }
 
-    fun loginClicked(view: View){
+    fun registroClicked(view: View){
         val intentMenu = Intent(this, ActividadMenu2::class.java).apply {
 
         }
@@ -67,15 +65,16 @@ class ActividadLogin : AppCompatActivity() {
         val password = editTextTextPassword.text.toString()
         //val passwordConfirmar = editTextTextPasswordConfirm.text.toString();
 
-        signIn(correo, password)
-        if(flag == 1){
-            startActivity(intentMenu)
-            flag= 0
+        createAccount(correo, password)
+
+        //AGREGAR MENSAJE DE CONFIRMACION
+
+        /*if(passwordConfirmar == password){
+            createAccount(correo, password);
         }else{
-            println("Error al ingresar")
-            flag = 0
-        }
+            println("Las contraseñas no coinciden")
+        }*/
 
-
+        startActivity(intentMenu)
     }
 }
