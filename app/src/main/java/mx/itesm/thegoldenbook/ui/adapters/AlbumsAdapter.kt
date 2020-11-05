@@ -22,9 +22,9 @@ class AlbumsAdapter(
     override fun onBindViewHolder(holder: AlbumHolder, position: Int) {
         val item: Album = list[position]
 
-        holder.tvAlbumTitle.text = item.title
+        holder.tvAlbumTitle.text = item.titulo
 
-        holder.ivAlbum.setImageResource(item.cover)
+        holder.ivAlbum.setImageResource(item.albumId)
 
         holder.cvContainer.setOnClickListener {
             listener.onItemSelected(it, item)

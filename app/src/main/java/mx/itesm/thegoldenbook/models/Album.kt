@@ -1,6 +1,9 @@
 package mx.itesm.thegoldenbook.models
 
 data class Album(
-    val title: String,
-    val cover: Int
+    val albumId: Int,
+    val ownerId: Int,
+    val titulo: String,
+    val rutaPortada: String,
+    val fechaCreacion: Long
 )
