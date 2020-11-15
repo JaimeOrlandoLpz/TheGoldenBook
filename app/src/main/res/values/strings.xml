@@ -10,4 +10,7 @@
 
     <string name="facebook_app_id" translatable="false">364181208151392</string>
     <string name="fb_login_protocol_scheme" translatable="false">fb364181208151392</string>
+
+    <string name="key_user_logged" translatable="false">key_user_logged</string>
+    <string name="key_current_user" translatable="false">key_current_user</string>
 </resources>

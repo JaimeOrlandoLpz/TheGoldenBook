@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/campoUsername"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
@@ -49,14 +48,13 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextMail" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnLoginEmail"
         android:layout_width="195dp"
         android:layout_height="64dp"
         android:layout_marginStart="165dp"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="159dp"
         android:background="@drawable/botonovalo"
-        android:onClick="loginClicked"
         android:text="Ingresar"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

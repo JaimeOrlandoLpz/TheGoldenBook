@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.CallbackManager
@@ -19,19 +20,23 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_crear_cuenta.*
 import mx.itesm.thegoldenbook.R
+import mx.itesm.thegoldenbook.application.Settings
+import mx.itesm.thegoldenbook.models.Owner
+import mx.itesm.thegoldenbook.repositories.UsersRepository
 
 class ActividadLogin : AppCompatActivity() {
-    var flag = 0
     private val permissions: ArrayList<String> = ArrayList()
     private val auth = FirebaseAuth.getInstance()
     private lateinit var callbackManager: CallbackManager
     private lateinit var loginButton: LoginButton
+    private lateinit var btnLoginEmail: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         loginButton = findViewById(R.id.loginButton)
+        btnLoginEmail = findViewById(R.id.btnLoginEmail)
 
         // Facebook Permissions
         permissions.add("email")
@@ -42,7 +47,7 @@ class ActividadLogin : AppCompatActivity() {
         loginButton.setReadPermissions(permissions)
         loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
                 override fun onSuccess(loginResult: LoginResult?) {
-                    loginSuccess(loginResult)
+                    loginFacebookSuccess(loginResult)
                 }
 
                 override fun onError(ex: FacebookException) {
@@ -53,9 +58,24 @@ class ActividadLogin : AppCompatActivity() {
                     Log.d("Jaime", "facebook:onCancel")
                 }
             })
+
+        btnLoginEmail.setOnClickListener {
+            loginEmail()
+        }
     }
 
-    private fun loginSuccess(loginResult: LoginResult?) {
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        updateUI(currentUser)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun loginFacebookSuccess(loginResult: LoginResult?) {
         if(loginResult == null) {
             return
         }
@@ -71,19 +91,8 @@ class ActividadLogin : AppCompatActivity() {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("Jaime","Login Success")
 
-                        val firebaseUser = auth.currentUser
-
-                        if (firebaseUser != null) {
-                            val firebaseId = firebaseUser.uid
-                            val userName = if (firebaseUser.displayName == null) "" else firebaseUser.displayName!!
-                            val email = if (firebaseUser.email == null) "" else firebaseUser.email!!
-                            val photoUrl = if (firebaseUser.photoUrl == null) "" else firebaseUser.photoUrl.toString() + "?type=large"
-                            loginUser(firebaseId, userName, email, photoUrl)
-
-
-                        } else {
-                            //TODO setUserLogged(false)
-                        }
+                        val currentUser = auth.currentUser
+                        updateUI(currentUser)
                     } else {
                         // If sign in fails, display a message to the user.
                         if (task.exception == null) {
@@ -97,67 +106,38 @@ class ActividadLogin : AppCompatActivity() {
             })
     }
 
-    fun loginUser(uid: String, displayName: String, email: String, photoUrl: String) {
-        Log.d("Jaime", "UID: $uid")
-        Log.d("Jaime", "displayName: $displayName")
-        Log.d("Jaime", "email: $email")
-        Log.d("Jaime", "photoUrl: $photoUrl")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val currentUser = auth.currentUser
-        updateUI(currentUser)
-    }
-
     private fun updateUI(currentUser: FirebaseUser?) {
+        if(currentUser != null) {
+            val firebaseId = currentUser.uid
+            val userName = if (currentUser.displayName == null) "" else currentUser.displayName!!
+            val email = if (currentUser.email == null) "" else currentUser.email!!
+            val photoUrl = if (currentUser.photoUrl == null) "" else currentUser.photoUrl.toString() + "?type=large"
 
+            val owner = Owner(firebaseId, userName, "", email, photoUrl, 0)
+            Settings.setCurrentUser(owner)
+            UsersRepository.instance.insert(owner)
+
+            Settings.setLogged(true)
+
+            val intent = Intent(this, ActividadMenu2::class.java)
+            startActivity(intent)
+        } else {
+            Settings.setLogged(false)
+        }
     }
 
-    fun signIn(correo: String, password: String){
-        auth.signInWithEmailAndPassword(correo, password).addOnCompleteListener(this) { task ->
+    private fun loginEmail() {
+        val email = editTextTextMail.text.toString()
+        val password = editTextTextPassword.text.toString()
+
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                // Sign in success, update UI with the signed-in user's information
-                println("signInWithEmail:success")
-                val user = auth.currentUser
-                updateUI(user)
-                flag = 1
+                val currentUser = auth.currentUser
+                updateUI(currentUser)
             } else {
-                // If sign in fails, display a message to the user.
-                println("signInWithEmail:failure")
-                Toast.makeText(
-                    this@ActividadLogin,
-                    "Usuario o contraseña incorrectos.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this@ActividadLogin, "Usuario o contraseña incorrectos.", Toast.LENGTH_SHORT).show()
                 updateUI(null)
-                flag = 2
             }
         }
-    }
-
-    fun loginClicked(view: View) {
-        val intentMenu = Intent(this, ActividadMenu2::class.java).apply {
-
-        }
-        val correo = editTextTextMail.text.toString()
-        val password = editTextTextPassword.text.toString()
-        //val passwordConfirmar = editTextTextPasswordConfirm.text.toString();
-
-        signIn(correo, password)
-        if(flag == 1){
-            startActivity(intentMenu)
-            flag= 0
-        }else{
-            println("Error al ingresar")
-            flag = 0
-        }
-
-
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data)
     }
 }

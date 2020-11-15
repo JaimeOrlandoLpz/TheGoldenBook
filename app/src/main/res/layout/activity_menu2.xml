@@ -1,72 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".ui.activities.ActividadMenu2">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/cherry_swash"
         android:text="@string/app_name"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:fontFamily="@font/cherry_swash"
+        android:layout_marginTop="28dp" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="24sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:fontFamily="@font/cherry_swash"
+        android:layout_marginTop="28dp" />
 
     <Button
         android:id="@+id/btnCrearLibro"
         android:layout_width="175dp"
         android:layout_height="100dp"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="161dp"
+        android:text="Crear Libro Nuevo"
+        android:textSize="@dimen/textSizeMenu"
         android:background="@drawable/botonovalo"
         android:fontFamily="@font/cherry_swash"
         android:onClick="crearNuevoClicked"
-        android:text="Crear Libro Nuevo"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        android:layout_marginTop="48dp"/>
 
     <Button
         android:id="@+id/btnEditarLibro"
         android:layout_width="175dp"
         android:layout_height="100dp"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="161dp"
-        android:background="@drawable/botonovalo"
-        android:fontFamily="@font/cherry_swash"
-        android:onClick="galeriaClicked"
         android:text="@string/titleGaleria"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCrearLibro" />
+        android:textSize="@dimen/textSizeMenu"
+        android:fontFamily="@font/cherry_swash"
+        android:background="@drawable/botonovalo"
+        android:layout_marginTop="20dp" />
 
     <Button
         android:id="@+id/btnPerfil"
         android:layout_width="175dp"
         android:layout_height="100dp"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="161dp"
-        android:background="@drawable/botonovalo"
-        android:fontFamily="@font/cherry_swash"
-        android:onClick="usuarioClicked"
         android:text="Mi Perfil"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEditarLibro" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textSize="@dimen/textSizeMenu"
+        android:fontFamily="@font/cherry_swash"
+        android:background="@drawable/botonovalo"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="175dp"
+        android:layout_height="100dp"
+        android:text="Cerrar sesión"
+        android:textSize="@dimen/textSizeMenu"
+        android:fontFamily="@font/cherry_swash"
+        android:background="@drawable/botonovalo"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>

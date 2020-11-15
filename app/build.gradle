@@ -59,7 +59,10 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-database:19.5.1'
-    implementation 'com.google.firebase:firebase-auth:20.0.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.1'
+
+    // GSON
+    implementation 'com.google.code.gson:gson:2.8.6'
 
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
