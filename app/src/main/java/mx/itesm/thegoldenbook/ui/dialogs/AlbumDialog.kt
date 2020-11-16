@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.annotation.NonNull
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.interfaces.ItemListener
 import mx.itesm.thegoldenbook.models.Album
 
 class AlbumDialog private constructor(context: Context, private val listener: ItemListener<Album>): Dialog(context) {
+    private lateinit var tvTituloAlbum: TextView
     private lateinit var edtTituloAlbum: EditText
     private lateinit var btnAceptar: Button
     private lateinit var btnCancelar: Button
@@ -21,6 +23,7 @@ class AlbumDialog private constructor(context: Context, private val listener: It
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_album)
 
+        tvTituloAlbum = findViewById(R.id.tvTituloAlbum)
         edtTituloAlbum = findViewById(R.id.edtTituloAlbum)
         btnAceptar = findViewById(R.id.btnAceptar)
         btnCancelar = findViewById(R.id.btnCancelar)
@@ -69,8 +72,10 @@ class AlbumDialog private constructor(context: Context, private val listener: It
 
         if(model != null) {
             edtTituloAlbum.setText(model!!.titulo)
+            tvTituloAlbum.text = "Editar album"
         } else {
             edtTituloAlbum.setText("")
+            tvTituloAlbum.text = "Nuevo album"
         }
     }
 

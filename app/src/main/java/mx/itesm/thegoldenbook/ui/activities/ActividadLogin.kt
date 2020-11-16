@@ -3,7 +3,6 @@ package mx.itesm.thegoldenbook.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_crear_cuenta.*
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.application.Settings
 import mx.itesm.thegoldenbook.models.Owner
-import mx.itesm.thegoldenbook.repositories.UsersRepository
+import mx.itesm.thegoldenbook.repositories.FirebaseRepository
 
 class ActividadLogin : AppCompatActivity() {
     private val permissions: ArrayList<String> = ArrayList()
@@ -115,7 +114,7 @@ class ActividadLogin : AppCompatActivity() {
 
             val owner = Owner(firebaseId, userName, "", email, photoUrl, 0)
             Settings.setCurrentUser(owner)
-            UsersRepository.instance.insert(owner)
+            FirebaseRepository.instance.insert(owner)
 
             Settings.setLogged(true)
 

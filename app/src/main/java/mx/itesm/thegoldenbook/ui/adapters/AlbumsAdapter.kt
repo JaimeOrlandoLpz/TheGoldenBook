@@ -24,7 +24,7 @@ class AlbumsAdapter(
 
         holder.tvAlbumTitle.text = item.titulo
 
-        holder.ivAlbum.setImageResource(item.albumId)
+        // TODO holder.ivAlbum.setImageResource(item.rutaPortada)
 
         holder.cvContainer.setOnClickListener {
             listener.onItemSelected(it, item)
