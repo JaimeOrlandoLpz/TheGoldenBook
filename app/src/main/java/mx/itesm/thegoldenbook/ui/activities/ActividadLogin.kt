@@ -120,6 +120,7 @@ class ActividadLogin : AppCompatActivity() {
 
             val intent = Intent(this, ActividadMenu2::class.java)
             startActivity(intent)
+            finish()
         } else {
             Settings.setLogged(false)
         }

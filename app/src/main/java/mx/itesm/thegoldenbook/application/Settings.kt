@@ -16,16 +16,25 @@ class Settings {
             return PreferenceManager.instance.getBoolean(R.string.key_user_logged)
         }
 
-        fun setCurrentUser(owner: Owner) {
-            val gson = Gson()
-            val json = gson.toJson(owner)
-            PreferenceManager.instance.set(R.string.key_current_user, json)
+        fun setCurrentUser(owner: Owner?) {
+            if(owner == null) {
+                PreferenceManager.instance.set(R.string.key_current_user, "")
+            } else {
+                val gson = Gson()
+                val json = gson.toJson(owner)
+                PreferenceManager.instance.set(R.string.key_current_user, json)
+            }
         }
 
-        fun getCurrentUser(): Owner {
+        fun getCurrentUser(): Owner? {
             val gson = Gson()
             val type = object : TypeToken<Owner>() {}.type
             val json = PreferenceManager.instance.getString(R.string.key_current_user)
+
+            if(json.isEmpty()) {
+                return null
+            }
+
             return gson.fromJson(json, type)
         }
     }

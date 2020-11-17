@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context=".ui.activities.ActividadLogin">
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="@dimen/textSizeLogin"/>
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        android:layout_marginStart="146dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="146dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icono_libro" />
 
     <EditText
@@ -42,46 +43,22 @@
         android:layout_marginEnd="32dp"
         android:ems="10"
         android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextMail" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btnLoginEmail"
         android:layout_width="195dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="165dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="159dp"
         android:background="@drawable/botonovalo"
         android:text="Ingresar"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+        android:textSize="24sp" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_marginTop="30dp" />
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/common_google_signin_btn_icon_dark"
-        android:backgroundTint="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/googleg_standard_color_18" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

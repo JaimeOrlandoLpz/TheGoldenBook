@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.login.LoginManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.application.Settings
@@ -20,6 +22,7 @@ import mx.itesm.thegoldenbook.utils.Constants
 class ActividadMenu2 : AppCompatActivity() {
     private lateinit var tvUserName: TextView
     private lateinit var btnCrearLibro: Button
+    private lateinit var btnLogout: Button
     private lateinit var dialogAlbum: AlbumDialog.Companion.Builder
     private lateinit var databaseReference: DatabaseReference
     private var count = -0L
@@ -30,19 +33,20 @@ class ActividadMenu2 : AppCompatActivity() {
 
         tvUserName = findViewById(R.id.tvUserName)
         btnCrearLibro = findViewById(R.id.btnCrearLibro)
+        btnLogout = findViewById(R.id.btnLogout)
 
-        val currentUser: Owner = Settings.getCurrentUser()
+        val currentUser: Owner? = Settings.getCurrentUser()
 
         dialogAlbum = AlbumDialog.Companion.Builder(this, object: ItemListener<Album> {
             override fun onItemSelected(model: Album) {
                 Log.d("Jaime", "Album titulo: " + model.titulo)
 
-                val album = Album(count, currentUser.uid, model.titulo, model.rutaPortada, model.fechaCreacion)
+                val album = Album(count, currentUser!!.uid, model.titulo, model.rutaPortada, model.fechaCreacion)
                 FirebaseRepository.instance.insert(album)
             }
         })
 
-        databaseReference = FirebaseDatabase.getInstance().reference.child(Constants.RefUsers).child(currentUser.uid).child(Constants.RefAlbums)
+        databaseReference = FirebaseDatabase.getInstance().reference.child(Constants.RefUsers).child(currentUser!!.uid).child(Constants.RefAlbums)
         Log.d("Jaime", databaseReference.toString())
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -59,6 +63,18 @@ class ActividadMenu2 : AppCompatActivity() {
 
         btnCrearLibro.setOnClickListener {
             dialogAlbum.create(null)
+        }
+
+        btnLogout.setOnClickListener {
+            val auth = FirebaseAuth.getInstance()
+            auth.signOut()
+            LoginManager.getInstance().logOut()
+
+            Settings.setLogged(false)
+            Settings.setCurrentUser(null)
+
+            startActivity(Intent(this, ActividadLogin::class.java))
+            finish()
         }
 
         val text = "Hola, " + currentUser.nombre + " " + currentUser.apellidoP

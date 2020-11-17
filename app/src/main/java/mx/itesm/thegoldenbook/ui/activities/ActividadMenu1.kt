@@ -14,12 +14,10 @@ class ActividadMenu1 : AppCompatActivity() {
         setContentView(R.layout.activity_menu1)
     }
 
-    fun loginClicked(view: View){
-        val intentLog = Intent(this, ActividadLogin::class.java).apply {
-
-        }
-
-        startActivity(intentLog)
+    fun loginClicked(view: View) {
+        val intent = Intent(this, ActividadLogin::class.java)
+        startActivity(intent)
+        finish()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean{
