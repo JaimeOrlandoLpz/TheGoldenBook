@@ -1,6 +1,8 @@
 package mx.itesm.thegoldenbook.repositories
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.database.*
 import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.models.Owner
@@ -20,6 +22,26 @@ class FirebaseRepository private constructor() {
                 if(snapshot.exists()) {
                     Log.d("Jaime", "Usuario ${owner.uid} existe")
                 } else {
+                    databaseReference.setValue(owner)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("Jaime", "Eror insert owner: $error")
+            }
+        })
+    }
+
+    fun registrar(context: Context, owner: Owner) {
+        val databaseReference: DatabaseReference
+        val firebaseDatabase = FirebaseDatabase.getInstance()
+        databaseReference = firebaseDatabase.reference.child(Constants.RefUsers).child(owner.uid)
+        databaseReference.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()) {
+                    Toast.makeText(context, "La cuenta ya existe, se iniciará sesión", Toast.LENGTH_SHORT).show()
+                } else {
+                    databaseReference.removeEventListener(this)
                     databaseReference.setValue(owner)
                 }
             }

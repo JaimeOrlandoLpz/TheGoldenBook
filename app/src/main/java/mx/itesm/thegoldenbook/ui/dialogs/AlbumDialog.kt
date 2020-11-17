@@ -32,7 +32,7 @@ class AlbumDialog private constructor(context: Context, private val listener: It
             val titulo = edtTituloAlbum.text.toString()
 
             if(titulo.isEmpty()) {
-                edtTituloAlbum.error = "El campo no debe estar vacio"
+                edtTituloAlbum.error = "El campo no debe estar vacío"
             } else {
                 cancel()
 
