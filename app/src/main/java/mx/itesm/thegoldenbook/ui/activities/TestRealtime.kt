@@ -18,7 +18,7 @@ class TestRealtime: AppCompatActivity() {
         val firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase.reference
 
-        val owner = Owner("test", "Roberto", "Martinez Roman", "rmroman@tec.mx", "https://www.google.com", System.currentTimeMillis());
+        val owner = Owner("test", "Roberto Martinez Roman", "rmroman@tec.mx", "https://www.google.com", System.currentTimeMillis());
         databaseReference.child("Users").setValue(owner).addOnCompleteListener {
             Log.d("Jaime", "Correcto")
         }.addOnSuccessListener {

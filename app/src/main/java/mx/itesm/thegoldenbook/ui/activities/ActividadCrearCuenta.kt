@@ -32,7 +32,6 @@ class ActividadCrearCuenta: AppCompatActivity() {
     private lateinit var loginButton: LoginButton
 
     private lateinit var edtNombre: EditText
-    private lateinit var edtApellido: EditText
     private lateinit var edtEmail: EditText
     private lateinit var edtPassword: EditText
     private lateinit var edtConfirmarPassword: EditText
@@ -44,7 +43,6 @@ class ActividadCrearCuenta: AppCompatActivity() {
 
         loginButton = findViewById(R.id.loginButton)
         edtNombre = findViewById(R.id.edtNombre)
-        edtApellido = findViewById(R.id.edtApellido)
         edtEmail = findViewById(R.id.edtEmail)
         edtPassword = findViewById(R.id.edtPassword)
         edtConfirmarPassword = findViewById(R.id.edtConfirmarPassword)
@@ -88,11 +86,9 @@ class ActividadCrearCuenta: AppCompatActivity() {
             val owner: Owner = if(isForm) {
                 val firebaseId = currentUser.uid
                 val nombre = edtNombre.text.toString()
-                val apellido = edtApellido.text.toString()
                 val email = if (currentUser.email == null) "" else currentUser.email!!
 
-                val owner = Owner(firebaseId, nombre, apellido, email, "", 0)
-
+                val owner = Owner(firebaseId, nombre, email, "", 0)
                 owner
             } else {
                 val firebaseId = currentUser.uid
@@ -100,8 +96,7 @@ class ActividadCrearCuenta: AppCompatActivity() {
                 val email = if (currentUser.email == null) "" else currentUser.email!!
                 val photoUrl = if (currentUser.photoUrl == null) "" else currentUser.photoUrl.toString() + "?type=large"
 
-                val owner = Owner(firebaseId, userName, "", email, photoUrl, 0)
-
+                val owner = Owner(firebaseId, userName, email, photoUrl, 0)
                 owner
             }
 
@@ -122,18 +117,13 @@ class ActividadCrearCuenta: AppCompatActivity() {
 
     private fun registrar() {
         val nombre = edtNombre.text.toString()
-        val apellido = edtApellido.text.toString()
         val email = edtEmail.text.toString()
         val password = edtPassword.text.toString()
         val passwordConfirmar = edtConfirmarPassword.text.toString()
 
-        if(nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || password.isEmpty() || password.isEmpty()) {
+        if(nombre.isEmpty() || email.isEmpty() || password.isEmpty() || password.isEmpty()) {
             if(nombre.isEmpty()) {
                 edtNombre.error = "El campo no debe estar vacío"
-            }
-
-            if(apellido.isEmpty()) {
-                edtApellido.error = "El campo no debe estar vacío"
             }
 
             if(email.isEmpty()) {

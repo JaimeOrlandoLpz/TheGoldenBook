@@ -7,6 +7,7 @@ import com.google.firebase.database.*
 import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.models.Owner
 import mx.itesm.thegoldenbook.utils.Constants
+import mx.itesm.thegoldenbook.utils.Utils
 
 class FirebaseRepository private constructor() {
     companion object {
@@ -32,6 +33,13 @@ class FirebaseRepository private constructor() {
         })
     }
 
+    fun update(owner: Owner) {
+        val databaseReference: DatabaseReference
+        val firebaseDatabase = FirebaseDatabase.getInstance()
+        databaseReference = firebaseDatabase.reference.child(Constants.RefUsers).child(owner.uid)
+        databaseReference.updateChildren(owner.toMap())
+    }
+
     fun registrar(context: Context, owner: Owner) {
         val databaseReference: DatabaseReference
         val firebaseDatabase = FirebaseDatabase.getInstance()
@@ -50,10 +58,6 @@ class FirebaseRepository private constructor() {
                 Log.d("Jaime", "Eror insert owner: $error")
             }
         })
-    }
-
-    fun update(owner: Owner) {
-
     }
 
     fun delete(owner: Owner) {

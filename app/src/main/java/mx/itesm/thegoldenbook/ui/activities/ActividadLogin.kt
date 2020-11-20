@@ -114,7 +114,7 @@ class ActividadLogin : AppCompatActivity() {
             val email = if (currentUser.email == null) "" else currentUser.email!!
             val photoUrl = if (currentUser.photoUrl == null) "" else currentUser.photoUrl.toString() + "?type=large"
 
-            val owner = Owner(firebaseId, userName, "", email, photoUrl, 0)
+            val owner = Owner(firebaseId, userName, email, photoUrl, 0)
             Settings.setCurrentUser(owner)
             FirebaseRepository.instance.insert(owner)
 
