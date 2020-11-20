@@ -15,6 +15,8 @@ import mx.itesm.thegoldenbook.models.Owner
 import mx.itesm.thegoldenbook.repositories.FirebaseRepository
 import mx.itesm.thegoldenbook.utils.DatePickerFragment
 import mx.itesm.thegoldenbook.utils.Utils
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
 import java.util.*
 
 class InfoUsuario : AppCompatActivity() {
@@ -58,16 +60,23 @@ class InfoUsuario : AppCompatActivity() {
                     edtEmail.error = "El campo no debe estar vacío"
                 }
             } else {
-                val date = Date(fechaNacimiento)
-                val owner = Owner(account.uid, nombre, email, account.fotoPerfil, date.time)
-                Utils.print(owner.fechaNacimiento.toString())
-                FirebaseRepository.instance.update(owner)
+                try {
+                    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    val parsedDate: Date = dateFormat.parse(fechaNacimiento)!!
+                    val timestamp = Timestamp(parsedDate.time)
+
+                    val owner = Owner(account.uid, nombre, email, account.fotoPerfil, timestamp.time)
+                    Utils.print(owner.fechaNacimiento.toString())
+                    FirebaseRepository.instance.update(this, owner)
+                } catch (ex: Exception) {
+                    Utils.print(ex.toString())
+                }
             }
         }
     }
 
     private fun getDatePicker() {
-        val newFragment = DatePickerFragment(object: DatePickerDialog.OnDateSetListener {
+        val newFragment = DatePickerFragment(object : DatePickerDialog.OnDateSetListener {
             override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
                 val selectedDate = dayOfMonth.toString() + "/" + (month + 1) + "/" + year
                 tvFechaNacimiento.text = selectedDate

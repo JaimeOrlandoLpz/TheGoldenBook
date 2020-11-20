@@ -1,6 +1,8 @@
 package mx.itesm.thegoldenbook.ui.activities
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -22,6 +24,9 @@ import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.application.Settings
 import mx.itesm.thegoldenbook.models.Owner
 import mx.itesm.thegoldenbook.repositories.FirebaseRepository
+import mx.itesm.thegoldenbook.utils.Utils
+import java.io.ByteArrayOutputStream
+
 
 class ActividadLogin : AppCompatActivity() {
     private val permissions: ArrayList<String> = ArrayList()
@@ -51,7 +56,7 @@ class ActividadLogin : AppCompatActivity() {
         loginButton.setReadPermissions(permissions)
         loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
             override fun onSuccess(loginResult: LoginResult?) {
-                if(loginResult != null) {
+                if (loginResult != null) {
                     loginFacebookSuccess(loginResult)
                 }
             }
@@ -86,11 +91,12 @@ class ActividadLogin : AppCompatActivity() {
         val token = accessToken.token
         val credential = FacebookAuthProvider.getCredential(token)
 
-        auth.signInWithCredential(credential).addOnCompleteListener(object : OnCompleteListener<AuthResult?> {
+        auth.signInWithCredential(credential).addOnCompleteListener(object :
+            OnCompleteListener<AuthResult?> {
             override fun onComplete(task: Task<AuthResult?>) {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d("Jaime","Login Success")
+                    Log.d("Jaime", "Login Success")
 
                     val currentUser = auth.currentUser
                     updateUI(currentUser)
@@ -107,18 +113,33 @@ class ActividadLogin : AppCompatActivity() {
         })
     }
 
-    private fun updateUI(currentUser: FirebaseUser?) {
-        if(currentUser != null) {
-            val firebaseId = currentUser.uid
-            val userName = if (currentUser.displayName == null) "" else currentUser.displayName!!
-            val email = if (currentUser.email == null) "" else currentUser.email!!
-            val photoUrl = if (currentUser.photoUrl == null) "" else currentUser.photoUrl.toString() + "?type=large"
+    private fun updateUI(firebaseUser: FirebaseUser?) {
+        if(firebaseUser != null) {
+            val currentUser = Settings.getCurrentUser()
+            if(currentUser != null) {
+                Utils.print("Login correcto")
+            } else {
+                val firebaseId = firebaseUser.uid
+                val userName = if (firebaseUser.displayName == null) "" else firebaseUser.displayName!!
+                val email = if (firebaseUser.email == null) "" else firebaseUser.email!!
+                val photoUrl = if (firebaseUser.photoUrl == null) "" else firebaseUser.photoUrl.toString() + "?type=large"
 
-            val owner = Owner(firebaseId, userName, email, photoUrl, 0)
-            Settings.setCurrentUser(owner)
-            FirebaseRepository.instance.insert(owner)
+                val owner = Owner(firebaseId, userName, email, photoUrl, 0)
+                Settings.setCurrentUser(owner)
+                FirebaseRepository.instance.insert(owner)
 
-            Settings.setLogged(true)
+                val bitmap = BitmapFactory.decodeResource(
+                    resources,
+                    R.drawable.avatar
+                )
+
+                val byteArrayOutputStream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+                val data = byteArrayOutputStream.toByteArray()
+                FirebaseRepository.instance.uploadDefault(owner.uid, data)
+
+                Settings.setLogged(true)
+            }
 
             val intent = Intent(this, ActividadMenu2::class.java)
             startActivity(intent)
@@ -137,7 +158,7 @@ class ActividadLogin : AppCompatActivity() {
                 val currentUser = auth.currentUser
                 updateUI(currentUser)
             } else {
-                Toast.makeText(this@ActividadLogin, "Usuario o contraseña incorrectos.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Usuario o contraseña incorrectos.", Toast.LENGTH_SHORT).show()
                 updateUI(null)
             }
         }

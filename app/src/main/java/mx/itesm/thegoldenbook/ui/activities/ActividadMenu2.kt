@@ -71,19 +71,13 @@ class ActividadMenu2 : AppCompatActivity() {
         }
 
         btnLogout.setOnClickListener {
-            val auth = FirebaseAuth.getInstance()
-            auth.signOut()
-            LoginManager.getInstance().logOut()
-
-            Settings.setLogged(false)
-            Settings.setCurrentUser(null)
-
-            startActivity(Intent(this, ActividadLogin::class.java))
-            finish()
+            logout()
         }
+    }
 
-        val text = "Hola, " + currentUser.nombre
-        tvUserName.text = text
+    override fun onResume() {
+        super.onResume()
+        mostrarNombre()
     }
 
     fun galeriaClicked() {
@@ -104,5 +98,32 @@ class ActividadMenu2 : AppCompatActivity() {
     fun ayudaClicked() {
         val intent = Intent(this, Ayuda::class.java)
         startActivity(intent)
+    }
+
+    fun mostrarNombre() {
+        val currentUser = Settings.getCurrentUser()
+        if(currentUser != null) {
+            val text = if(currentUser.nombre.isEmpty()) {
+                "Hola usuario"
+            } else {
+                "Hola, " + currentUser.nombre
+            }
+
+            tvUserName.text = text
+        } else {
+            logout()
+        }
+    }
+
+    private fun logout() {
+        val auth = FirebaseAuth.getInstance()
+        auth.signOut()
+        LoginManager.getInstance().logOut()
+
+        Settings.setLogged(false)
+        Settings.setCurrentUser(null)
+
+        startActivity(Intent(this, ActividadLogin::class.java))
+        finish()
     }
 }
