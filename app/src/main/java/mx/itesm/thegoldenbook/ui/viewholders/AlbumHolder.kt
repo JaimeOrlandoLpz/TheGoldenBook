@@ -11,7 +11,7 @@ import mx.itesm.thegoldenbook.R
 class AlbumHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val cvContainer: CardView = itemView.findViewById(R.id.cvContainer)
     val ivAlbum: ImageView = itemView.findViewById(R.id.ivAlbum)
-    val tvAlbumTitle: TextView = itemView.findViewById(R.id.tvAlbumTitle)
+    val tvAlbumTitle: TextView = itemView.findViewById(R.id.tvTitulo)
     val btnVer: Button = itemView.findViewById(R.id.btnVer)
     val btnEditar: Button = itemView.findViewById(R.id.btnEditar)
     val btnBorrar: Button = itemView.findViewById(R.id.btnBorrar)

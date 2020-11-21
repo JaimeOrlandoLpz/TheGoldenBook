@@ -1,6 +1,8 @@
 package mx.itesm.thegoldenbook.ui.activities
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,8 +26,14 @@ class GaleriaLibros : AppCompatActivity() {
         val currentUser = Settings.getCurrentUser()
 
         adapter = AlbumsAdapter(object: ItemListener<Album> {
-            override fun onItemSelected(model: Album) {
-
+            override fun onItemSelected(view: View, model: Album) {
+                if(view.id == R.id.btnVer || view.id == R.id.cvContainer) {
+                    Toast.makeText(applicationContext, "Ver ${model.titulo}", Toast.LENGTH_SHORT).show()
+                } else if(view.id == R.id.btnEditar) {
+                    Toast.makeText(applicationContext, "Editar ${model.titulo}", Toast.LENGTH_SHORT).show()
+                } else if(view.id == R.id.btnBorrar) {
+                    Toast.makeText(applicationContext, "Borrar ${model.titulo}", Toast.LENGTH_SHORT).show()
+                }
             }
         })
 
