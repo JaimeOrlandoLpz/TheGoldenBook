@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -62,11 +61,11 @@ class ActividadLogin : AppCompatActivity() {
             }
 
             override fun onError(ex: FacebookException) {
-                Log.d("Jaime", "facebook:onError: $ex")
+                Utils.print("facebook:onError: $ex")
             }
 
             override fun onCancel() {
-                Log.d("Jaime", "facebook:onCancel")
+                Utils.print("facebook:onCancel")
             }
         })
 
@@ -96,7 +95,7 @@ class ActividadLogin : AppCompatActivity() {
             override fun onComplete(task: Task<AuthResult?>) {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d("Jaime", "Login Success")
+                    Utils.print("Login Success")
 
                     val currentUser = auth.currentUser
                     updateUI(currentUser)
@@ -106,7 +105,7 @@ class ActividadLogin : AppCompatActivity() {
                         return
                     }
 
-                    Log.d("Jaime", "Login Exception: " + task.exception.toString())
+                    Utils.print("Login Exception: " + task.exception.toString())
                     // TODO setUserLogged(false)
                 }
             }

@@ -1,17 +1,18 @@
 package mx.itesm.thegoldenbook.repositories
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import mx.itesm.thegoldenbook.application.Settings
+import mx.itesm.thegoldenbook.interfaces.ChildListener
+import mx.itesm.thegoldenbook.interfaces.ItemListener
 import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.models.Owner
 import mx.itesm.thegoldenbook.utils.Constants
+import mx.itesm.thegoldenbook.utils.Utils
 
 
 class FirebaseRepository private constructor() {
@@ -26,14 +27,14 @@ class FirebaseRepository private constructor() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    Log.d("Jaime", "Usuario ${owner.uid} existe")
+                    Utils.print("Usuario ${owner.uid} existe")
                 } else {
                     databaseReference.setValue(owner)
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("Jaime", "Eror insert owner: $error")
+                Utils.print("Eror insert owner: $error")
             }
         })
     }
@@ -67,7 +68,7 @@ class FirebaseRepository private constructor() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d("Jaime", "Eror insert owner: $error")
+                Utils.print("Eror insert owner: $error")
             }
         })
     }
@@ -88,13 +89,13 @@ class FirebaseRepository private constructor() {
             .child(album.albumId.toString())
             .setValue(album)
             .addOnCompleteListener {
-                Log.d("Jaime", "Correcto")
+                Utils.print("Correcto")
             }.addOnSuccessListener {
-                Log.d("Jaime", "OnSuccess")
+                Utils.print("OnSuccess")
             }.addOnFailureListener {
-                Log.d("Jaime", it.toString())
+                Utils.print(it.toString())
             }.addOnCanceledListener {
-                Log.d("Jaime", "OnCancel")
+                Utils.print("OnCancel")
             }
     }
 
@@ -110,5 +111,102 @@ class FirebaseRepository private constructor() {
 
         // Create a reference to 'images/mountains.jpg'
         //val mountainImagesRef: StorageReference = storageRef.child("images/mountains.jpg")
+    }
+
+    fun getAlbums(context: Context, owner: Owner?, listener: ChildListener<Album>) {
+        if(owner == null) {
+            return
+        }
+
+        val databaseReference: DatabaseReference
+        val firebaseDatabase = FirebaseDatabase.getInstance()
+        databaseReference = firebaseDatabase.reference.child(Constants.RefUsers).child(owner.uid).child(Constants.RefAlbums)
+
+        val childEventListener = object : ChildEventListener {
+            override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                val key = dataSnapshot.key
+                Utils.print("onChildAdded: $key")
+
+                val album: Album? = dataSnapshot.getValue(Album::class.java)
+
+                if(key != null && album != null) {
+                    Utils.print(album.titulo)
+                    listener.onChildAdded(key.toInt(), album)
+                } else {
+                    Utils.print("Album nulo ${dataSnapshot.key}")
+                }
+            }
+
+            override fun onChildChanged(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                val key = dataSnapshot.key
+                Utils.print("onChildChanged: $key")
+
+                val album: Album? = dataSnapshot.getValue(Album::class.java)
+
+                if(key != null && album != null) {
+                    Utils.print(album.titulo)
+                    listener.onChildChanged(key.toInt(), album)
+                } else {
+                    Utils.print("Album nulo ${dataSnapshot.key}")
+                }
+            }
+
+            override fun onChildRemoved(dataSnapshot: DataSnapshot) {
+                val key = dataSnapshot.key
+                Utils.print("onChildRemoved: $key")
+
+                val album: Album? = dataSnapshot.getValue(Album::class.java)
+
+                if(key != null && album != null) {
+                    Utils.print(album.titulo)
+                    listener.onChildRemoved(key.toInt(), album)
+                } else {
+                    Utils.print("Album nulo ${dataSnapshot.key}")
+                }
+            }
+
+            override fun onChildMoved(dataSnapshot: DataSnapshot, previousChildName: String?) {
+                val key = dataSnapshot.key
+                Utils.print("onChildMoved: $key")
+
+                val album: Album? = dataSnapshot.getValue(Album::class.java)
+
+                if(key != null && album != null) {
+                    Utils.print(album.titulo)
+                    listener.onChildMoved(album)
+                } else {
+                    Utils.print("Album nulo ${dataSnapshot.key}")
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Utils.print("onCancelled ${databaseError.toException()}")
+                Toast.makeText(context, "Fallo al cargar albums", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        databaseReference.addChildEventListener(childEventListener)
+    }
+
+    fun getCount(currentUser: Owner?, listener: ItemListener<Long>) {
+        if(currentUser == null) {
+            return
+        }
+
+        val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference.child(Constants.RefUsers).child(currentUser.uid).child(Constants.RefAlbums)
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()) {
+                    val count = snapshot.childrenCount
+                    Utils.print("Count: $count and ${snapshot.key}")
+
+                    listener.onItemSelected(count)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Utils.print("Error $error")
+            }
+        })
     }
 }

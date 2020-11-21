@@ -3,7 +3,6 @@ package mx.itesm.thegoldenbook.ui.dialogs
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -11,6 +10,7 @@ import androidx.annotation.NonNull
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.interfaces.ItemListener
 import mx.itesm.thegoldenbook.models.Album
+import mx.itesm.thegoldenbook.utils.Utils
 
 class AlbumDialog private constructor(context: Context, private val listener: ItemListener<Album>): Dialog(context) {
     private lateinit var tvTituloAlbum: TextView
@@ -87,7 +87,7 @@ class AlbumDialog private constructor(context: Context, private val listener: It
                 dialog.setModel(album)
 
                 if(dialog.isShowing) {
-                    Log.d("Jaime", "El dialogo ya se está mostrando")
+                    Utils.print("El dialogo ya se está mostrando")
                 } else {
                     dialog.show()
                 }

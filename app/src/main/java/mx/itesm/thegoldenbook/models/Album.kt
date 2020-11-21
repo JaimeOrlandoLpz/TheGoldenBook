@@ -6,4 +6,12 @@ data class Album(
     val titulo: String,
     val rutaPortada: String,
     val fechaCreacion: Long
-)
+) {
+    constructor() : this(
+        0,
+        "",
+        "",
+        "",
+        0L
+    )
+}

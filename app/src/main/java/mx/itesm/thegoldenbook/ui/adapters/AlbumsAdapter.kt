@@ -10,9 +10,9 @@ import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.ui.viewholders.AlbumHolder
 
 class AlbumsAdapter(
-    private val list: ArrayList<Album>,
     private val listener: ItemListener<Album>
 ): RecyclerView.Adapter<AlbumHolder>() {
+    private val list: MutableList<Album> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_content_album, parent, false)
@@ -45,5 +45,20 @@ class AlbumsAdapter(
 
     override fun getItemCount(): Int {
         return list.size
+    }
+
+    fun add(position: Int, album: Album) {
+        list.add(position, album)
+        notifyDataSetChanged()
+    }
+
+    fun remove(id: Int) {
+        list.removeAt(id)
+        notifyDataSetChanged()
+    }
+
+    fun changed(position: Int, album: Album) {
+        list[position] = album
+        notifyDataSetChanged()
     }
 }

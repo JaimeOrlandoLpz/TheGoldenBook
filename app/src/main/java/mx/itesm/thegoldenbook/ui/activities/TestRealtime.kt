@@ -1,12 +1,12 @@
 package mx.itesm.thegoldenbook.ui.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.models.Owner
+import mx.itesm.thegoldenbook.utils.Utils
 
 class TestRealtime: AppCompatActivity() {
     private lateinit var databaseReference: DatabaseReference
@@ -20,13 +20,13 @@ class TestRealtime: AppCompatActivity() {
 
         val owner = Owner("test", "Roberto Martinez Roman", "rmroman@tec.mx", "https://www.google.com", System.currentTimeMillis());
         databaseReference.child("Users").setValue(owner).addOnCompleteListener {
-            Log.d("Jaime", "Correcto")
+            Utils.print("Correcto")
         }.addOnSuccessListener {
-            Log.d("Jaime", "OnSuccess")
+            Utils.print("OnSuccess")
         }.addOnFailureListener {
-            Log.d("Jaime", it.toString())
+            Utils.print(it.toString())
         }.addOnCanceledListener {
-            Log.d("Jaime", "OnCancel")
+            Utils.print("OnCancel")
         }
     }
 }

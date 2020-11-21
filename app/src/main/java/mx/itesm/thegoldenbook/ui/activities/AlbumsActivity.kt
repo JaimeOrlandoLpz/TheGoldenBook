@@ -2,7 +2,6 @@ package mx.itesm.thegoldenbook.ui.activities
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +34,7 @@ class AlbumsActivity: AppCompatActivity() {
         albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
         */
 
-        val adapter = AlbumsAdapter(albumList, object: ItemListener<Album> {
+        val adapter = AlbumsAdapter(object: ItemListener<Album> {
             override fun onItemSelected(view: View, model: Album) {
                 if(view.id == R.id.btnVer || view.id == R.id.cvContainer) {
                     //Toast.makeText(applicationContext, "Ver ${model.title}", Toast.LENGTH_SHORT).show()

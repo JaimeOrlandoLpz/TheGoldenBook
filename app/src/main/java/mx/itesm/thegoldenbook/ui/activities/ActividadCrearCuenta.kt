@@ -2,7 +2,6 @@ package mx.itesm.thegoldenbook.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -177,7 +176,7 @@ class ActividadCrearCuenta: AppCompatActivity() {
                             return
                         }
 
-                        Log.d("Jaime", "Login Exception: " + task.exception.toString())
+                        Utils.print("Login Exception: " + task.exception.toString())
                         // TODO setUserLogged(false)
                     }
                 }
