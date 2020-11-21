@@ -38,7 +38,7 @@
         </activity>
 
         <activity
-            android:name=".ui.activities.GaleriaLibros"
+            android:name=".ui.activities.GaleriaLibrosActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 

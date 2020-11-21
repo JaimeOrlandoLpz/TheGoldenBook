@@ -99,6 +99,28 @@ class FirebaseRepository private constructor() {
             }
     }
 
+    fun update(album: Album) {
+        val databaseReference: DatabaseReference
+        val firebaseDatabase = FirebaseDatabase.getInstance()
+        databaseReference = firebaseDatabase.reference
+
+        databaseReference
+            .child(Constants.RefUsers)
+            .child(album.ownerId)
+            .child(Constants.RefAlbums)
+            .child(album.albumId.toString())
+            .updateChildren(album.toMap())
+            .addOnCompleteListener {
+                Utils.print("Correcto")
+            }.addOnSuccessListener {
+                Utils.print("OnSuccess")
+            }.addOnFailureListener {
+                Utils.print(it.toString())
+            }.addOnCanceledListener {
+                Utils.print("OnCancel")
+            }
+    }
+
     fun uploadDefault(fileName: String, byteArray: ByteArray) {
         val storage = Firebase.storage
         // Create a storage reference from our app

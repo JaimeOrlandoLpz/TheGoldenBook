@@ -57,7 +57,7 @@ class ActividadMenu2 : AppCompatActivity() {
         }
 
         btnGaleria.setOnClickListener {
-            startActivity(Intent(this, GaleriaLibros::class.java))
+            startActivity(Intent(this, GaleriaLibrosActivity::class.java))
         }
 
         btnPerfil.setOnClickListener {
