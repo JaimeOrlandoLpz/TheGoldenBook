@@ -103,6 +103,8 @@ class GaleriaLibrosActivity : AppCompatActivity() {
                     }
 
                     adapter.setList(list)
+                } else {
+                    adapter.setList(ArrayList())
                 }
             }
 
