@@ -8,11 +8,12 @@ import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.interfaces.ItemListener
 import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.ui.viewholders.AlbumHolder
+import mx.itesm.thegoldenbook.utils.Utils
 
 class AlbumsAdapter(
     private val listener: ItemListener<Album>
 ): RecyclerView.Adapter<AlbumHolder>() {
-    private val list: MutableList<Album> = ArrayList()
+    private var list: MutableList<Album> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_content_album, parent, false)
@@ -47,18 +48,49 @@ class AlbumsAdapter(
         return list.size
     }
 
-    fun add(position: Int, album: Album) {
-        list.add(position, album)
-        notifyDataSetChanged()
+    fun add(album: Album) {
+        //list.add(album)
+        //notifyDataSetChanged()
     }
 
-    fun remove(id: Int) {
-        list.removeAt(id)
+    fun remove(albumId: String) {
+        /*
+        Utils.print("onChildRemoved 3 $albumId")
+        var itemToRemove: Album? = null
+
+        for(item in list) {
+            if(item.albumId == albumId) {
+                itemToRemove = item
+            }
+        }
+
+        if(itemToRemove != null) {
+            Utils.print("SuccessRemove $albumId")
+            listener.onItemSelected(itemToRemove)
+        }
+
         notifyDataSetChanged()
+        */
     }
 
-    fun changed(position: Int, album: Album) {
-        list[position] = album
+    fun changed(album: Album) {
+        /*
+        for(item in list) {
+            if(item.albumId == album.albumId) {
+                item.albumId = album.albumId
+                item.ownerId = album.ownerId
+                item.titulo = album.titulo
+                item.rutaPortada = album.rutaPortada
+                item.fechaCreacion = album.fechaCreacion
+            }
+        }
+
+        notifyDataSetChanged()
+        */
+    }
+
+    fun setList(list: MutableList<Album>) {
+        this.list = list
         notifyDataSetChanged()
     }
 }

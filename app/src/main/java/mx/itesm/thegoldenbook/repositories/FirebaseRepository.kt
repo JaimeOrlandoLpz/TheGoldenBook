@@ -73,30 +73,23 @@ class FirebaseRepository private constructor() {
         })
     }
 
-    fun delete(owner: Owner) {
-
-    }
-
-    fun insert(album: Album) {
-        val databaseReference: DatabaseReference
+    fun insert(ownerId: String, titulo: String) {
         val firebaseDatabase = FirebaseDatabase.getInstance()
-        databaseReference = firebaseDatabase.reference
-
-        databaseReference
+        val databaseReference: DatabaseReference = firebaseDatabase.reference
             .child(Constants.RefUsers)
-            .child(album.ownerId)
+            .child(ownerId)
             .child(Constants.RefAlbums)
-            .child(album.albumId.toString())
-            .setValue(album)
-            .addOnCompleteListener {
-                Utils.print("Correcto")
-            }.addOnSuccessListener {
-                Utils.print("OnSuccess")
-            }.addOnFailureListener {
-                Utils.print(it.toString())
-            }.addOnCanceledListener {
-                Utils.print("OnCancel")
-            }
+            .push()
+
+        val albumId = databaseReference.key
+
+        if(albumId != null) {
+            val rutaPortada = ""
+            val fechaCreacion = System.currentTimeMillis()
+            val album = Album(albumId, ownerId, titulo, rutaPortada, fechaCreacion)
+
+            databaseReference.setValue(album)
+        }
     }
 
     fun update(album: Album) {
@@ -121,6 +114,28 @@ class FirebaseRepository private constructor() {
             }
     }
 
+    fun delete(album: Album) {
+        val firebaseDatabase = FirebaseDatabase.getInstance()
+        val databaseReference = firebaseDatabase.reference
+            .child(Constants.RefUsers)
+            .child(album.ownerId)
+            .child(Constants.RefAlbums)
+            .child(album.albumId)
+
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (snapshot in dataSnapshot.children) {
+                    Utils.print("Remove ${snapshot.key}")
+                    snapshot.ref.removeValue()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Utils.print("onCancelled ${databaseError.toException()}")
+            }
+        })
+    }
+
     fun uploadDefault(fileName: String, byteArray: ByteArray) {
         val storage = Firebase.storage
         // Create a storage reference from our app
@@ -142,7 +157,9 @@ class FirebaseRepository private constructor() {
 
         val databaseReference: DatabaseReference
         val firebaseDatabase = FirebaseDatabase.getInstance()
-        databaseReference = firebaseDatabase.reference.child(Constants.RefUsers).child(owner.uid).child(Constants.RefAlbums)
+        databaseReference = firebaseDatabase.reference.child(Constants.RefUsers).child(owner.uid).child(
+            Constants.RefAlbums
+        )
 
         val childEventListener = object : ChildEventListener {
             override fun onChildAdded(dataSnapshot: DataSnapshot, previousChildName: String?) {
@@ -153,7 +170,7 @@ class FirebaseRepository private constructor() {
 
                 if(key != null && album != null) {
                     Utils.print(album.titulo)
-                    listener.onChildAdded(key.toInt(), album)
+                    listener.onChildAdded(album)
                 } else {
                     Utils.print("Album nulo ${dataSnapshot.key}")
                 }
@@ -167,7 +184,7 @@ class FirebaseRepository private constructor() {
 
                 if(key != null && album != null) {
                     Utils.print(album.titulo)
-                    listener.onChildChanged(key.toInt(), album)
+                    listener.onChildChanged(album)
                 } else {
                     Utils.print("Album nulo ${dataSnapshot.key}")
                 }
@@ -177,11 +194,9 @@ class FirebaseRepository private constructor() {
                 val key = dataSnapshot.key
                 Utils.print("onChildRemoved: $key")
 
-                val album: Album? = dataSnapshot.getValue(Album::class.java)
-
-                if(key != null && album != null) {
-                    Utils.print(album.titulo)
-                    listener.onChildRemoved(key.toInt(), album)
+                if(key != null) {
+                    Utils.print("onChildRemoved 1 $key")
+                    listener.onChildRemoved(key)
                 } else {
                     Utils.print("Album nulo ${dataSnapshot.key}")
                 }
@@ -215,13 +230,14 @@ class FirebaseRepository private constructor() {
             return
         }
 
-        val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference.child(Constants.RefUsers).child(currentUser.uid).child(Constants.RefAlbums)
+        val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference.child(
+            Constants.RefUsers
+        ).child(currentUser.uid).child(Constants.RefAlbums)
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     val count = snapshot.childrenCount
                     Utils.print("Count: $count and ${snapshot.key}")
-
                     listener.onItemSelected(count)
                 }
             }

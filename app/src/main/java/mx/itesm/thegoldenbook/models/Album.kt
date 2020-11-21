@@ -3,14 +3,14 @@ package mx.itesm.thegoldenbook.models
 import com.google.firebase.database.Exclude
 
 data class Album(
-    val albumId: Long,
-    val ownerId: String,
-    val titulo: String,
-    val rutaPortada: String,
-    val fechaCreacion: Long
+    var albumId: String,
+    var ownerId: String,
+    var titulo: String,
+    var rutaPortada: String,
+    var fechaCreacion: Long
 ) {
     constructor() : this(
-        0,
+        "",
         "",
         "",
         "",

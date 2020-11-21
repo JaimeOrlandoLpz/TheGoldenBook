@@ -23,7 +23,7 @@ class ActividadMenu2 : AppCompatActivity() {
     private lateinit var btnPerfil: Button
     private lateinit var btnLogout: Button
     private lateinit var dialogAlbum: AlbumDialog.Companion.Builder
-    private var count = -0L
+    //private var count = -0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,15 +40,13 @@ class ActividadMenu2 : AppCompatActivity() {
         dialogAlbum = AlbumDialog.Companion.Builder(this, object: ItemListener<Album> {
             override fun onItemSelected(model: Album) {
                 Utils.print("Album titulo: " + model.titulo)
-
-                val album = Album(count, currentUser!!.uid, model.titulo, model.rutaPortada, model.fechaCreacion)
-                FirebaseRepository.instance.insert(album)
+                FirebaseRepository.instance.insert(currentUser!!.uid, model.titulo)
             }
         })
 
         FirebaseRepository.instance.getCount(currentUser, object: ItemListener<Long> {
             override fun onItemSelected(model: Long) {
-                count = model
+                //count = model
             }
         })
 

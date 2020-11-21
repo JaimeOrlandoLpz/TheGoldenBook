@@ -6,4 +6,5 @@
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="backgroundFooter">#90000000</color>
+    <color name="colorGradient">#f6d365</color>
 </resources>

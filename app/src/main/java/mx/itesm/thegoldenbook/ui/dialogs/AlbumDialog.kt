@@ -50,7 +50,7 @@ class AlbumDialog private constructor(context: Context, private val listener: It
                     cancel()
                     listener.onItemSelected(album)
                 } else {
-                    val album = Album(-1, "", titulo, "", System.currentTimeMillis())
+                    val album = Album("", "", titulo, "", System.currentTimeMillis())
 
                     cancel()
                     listener.onItemSelected(album)
