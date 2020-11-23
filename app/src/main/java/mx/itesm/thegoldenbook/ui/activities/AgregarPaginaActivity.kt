@@ -1,12 +1,12 @@
 package mx.itesm.thegoldenbook.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import mx.itesm.thegoldenbook.R
 
-class VisualizarEsteLibro : AppCompatActivity() {
+class AgregarPaginaActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_visualizar_este_libro)
+        setContentView(R.layout.activity_agregar_pagina)
     }
 }

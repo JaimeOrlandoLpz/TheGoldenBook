@@ -34,7 +34,7 @@ class AlbumsActivity: AppCompatActivity() {
         albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
         */
 
-        val adapter = AlbumsAdapter(object: ItemListener<Album> {
+        val adapter = AlbumsAdapter(this, object: ItemListener<Album> {
             override fun onItemSelected(view: View, model: Album) {
                 if(view.id == R.id.btnVer || view.id == R.id.cvContainer) {
                     //Toast.makeText(applicationContext, "Ver ${model.title}", Toast.LENGTH_SHORT).show()

@@ -40,7 +40,7 @@ class ActividadMenu2 : AppCompatActivity() {
         dialogAlbum = AlbumDialog.Companion.Builder(this, object: ItemListener<Album> {
             override fun onItemSelected(model: Album) {
                 Utils.print("Album titulo: " + model.titulo)
-                FirebaseRepository.instance.insert(currentUser!!.uid, model.titulo)
+                FirebaseRepository.instance.insert(currentUser!!.uid, model)
             }
         })
 

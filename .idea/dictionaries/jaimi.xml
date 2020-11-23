@@ -2,6 +2,8 @@
   <dictionary name="jaimi">
     <words>
       <w>gson</w>
+      <w>pagina</w>
+      <w>paginas</w>
     </words>
   </dictionary>
 </component>

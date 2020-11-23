@@ -13,7 +13,7 @@ class VisualizarLibros : AppCompatActivity() {
     }
 
     fun visualizarLibro(v : View){
-        val intentVisualizar = Intent(this, VisualizarEsteLibro:: class.java).apply {
+        val intentVisualizar = Intent(this, VisualizarEsteLibroActivity:: class.java).apply {
 
         }
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
+
+    <TextView
+        android:id="@+id/tvTituloPagina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Editar página"
+        android:textSize="@dimen/textSizeBig"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/ivPaginaImagen"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:src="@drawable/ic_album"
+        android:layout_margin="10dp"
+        android:layout_above="@id/edtDescripcion"
+        android:layout_below="@id/tvTituloPagina"/>
+
+    <EditText
+        android:id="@+id/edtDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:lines="5"
+        android:textColorHint="@color/colorWhite"
+        android:layout_above="@id/fab"
+        android:hint="Descripción" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="25dp"
+        style="@style/Style.FloatingActionButton.Edit" />
+
+</RelativeLayout>

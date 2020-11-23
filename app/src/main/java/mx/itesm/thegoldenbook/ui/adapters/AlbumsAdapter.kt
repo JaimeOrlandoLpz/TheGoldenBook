@@ -1,16 +1,19 @@
 package mx.itesm.thegoldenbook.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.firebase.storage.FirebaseStorage
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.interfaces.ItemListener
 import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.ui.viewholders.AlbumHolder
-import mx.itesm.thegoldenbook.utils.Utils
 
 class AlbumsAdapter(
+    private val context: Context,
     private val listener: ItemListener<Album>
 ): RecyclerView.Adapter<AlbumHolder>() {
     private var list: MutableList<Album> = ArrayList()
@@ -25,7 +28,9 @@ class AlbumsAdapter(
 
         holder.tvAlbumTitle.text = item.titulo
 
-        // TODO holder.ivAlbum.setImageResource(item.rutaPortada)
+        val storage = FirebaseStorage.getInstance()
+        val gsReference = storage.getReferenceFromUrl("gs://goldenbook-3ae2f.appspot.com/album.png")
+        Glide.with(context).load(gsReference).into(holder.ivAlbum)
 
         holder.cvContainer.setOnClickListener {
             listener.onItemSelected(it, item)
@@ -46,47 +51,6 @@ class AlbumsAdapter(
 
     override fun getItemCount(): Int {
         return list.size
-    }
-
-    fun add(album: Album) {
-        //list.add(album)
-        //notifyDataSetChanged()
-    }
-
-    fun remove(albumId: String) {
-        /*
-        Utils.print("onChildRemoved 3 $albumId")
-        var itemToRemove: Album? = null
-
-        for(item in list) {
-            if(item.albumId == albumId) {
-                itemToRemove = item
-            }
-        }
-
-        if(itemToRemove != null) {
-            Utils.print("SuccessRemove $albumId")
-            listener.onItemSelected(itemToRemove)
-        }
-
-        notifyDataSetChanged()
-        */
-    }
-
-    fun changed(album: Album) {
-        /*
-        for(item in list) {
-            if(item.albumId == album.albumId) {
-                item.albumId = album.albumId
-                item.ownerId = album.ownerId
-                item.titulo = album.titulo
-                item.rutaPortada = album.rutaPortada
-                item.fechaCreacion = album.fechaCreacion
-            }
-        }
-
-        notifyDataSetChanged()
-        */
     }
 
     fun setList(list: MutableList<Album>) {

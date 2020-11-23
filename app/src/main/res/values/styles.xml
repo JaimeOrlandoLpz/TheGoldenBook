@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -23,6 +23,37 @@
         <item name="android:clickable">true</item>
         <item name="android:selectable">true</item>
         <item name="android:focusable">true</item>
+    </style>
+
+    <style name="Style.FloatingActionButton" parent="AppTheme">
+        <item name="rippleColor">@color/colorPrimary</item>
+        <item name="iconTint">@color/colorWhite</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:clickable">true</item>
+        <item name="android:selectable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:layout_marginEnd">15dp</item>
+        <item name="android:layout_marginBottom">25dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentEnd">true</item>
+    </style>
+
+    <style name="Style.FloatingActionButton.Add" parent="Style.FloatingActionButton">
+        <item name="icon">@drawable/ic_add</item>
+        <item name="android:text">Agregar página</item>
+    </style>
+
+    <style name="Style.FloatingActionButton.Save" parent="Style.FloatingActionButton">
+        <item name="icon">@drawable/ic_save</item>
+        <item name="android:text">Guardar página</item>
+    </style>
+
+    <style name="Style.FloatingActionButton.Edit" parent="Style.FloatingActionButton">
+        <item name="icon">@drawable/ic_save</item>
+        <item name="android:text">Editar página</item>
     </style>
 
 </resources>

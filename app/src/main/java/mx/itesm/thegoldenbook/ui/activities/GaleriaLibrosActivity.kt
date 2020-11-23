@@ -1,15 +1,13 @@
 package mx.itesm.thegoldenbook.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.*
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.application.Settings
-import mx.itesm.thegoldenbook.interfaces.ChildListener
 import mx.itesm.thegoldenbook.interfaces.ItemListener
 import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.repositories.FirebaseRepository
@@ -45,10 +43,15 @@ class GaleriaLibrosActivity : AppCompatActivity() {
             }
         })
 
-        adapter = AlbumsAdapter(object: ItemListener<Album> {
+        adapter = AlbumsAdapter(this, object: ItemListener<Album> {
             override fun onItemSelected(view: View, model: Album) {
                 if(view.id == R.id.btnVer || view.id == R.id.cvContainer) {
-                    Toast.makeText(applicationContext, "Ver ${model.titulo}", Toast.LENGTH_SHORT).show()
+                    val albumId = model.albumId
+
+                    val intent = Intent()
+                    intent.putExtra(Constants.ParamAlbumId, albumId)
+                    intent.setClass(this@GaleriaLibrosActivity, VisualizarEsteLibroActivity::class.java)
+                    startActivity(intent)
                 } else if(view.id == R.id.btnEditar) {
                     dialogAlbum.create(model)
                 } else if(view.id == R.id.btnBorrar) {
@@ -63,53 +66,13 @@ class GaleriaLibrosActivity : AppCompatActivity() {
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
 
-        FirebaseRepository.instance.getAlbums(this, currentUser, object: ChildListener<Album> {
-            override fun onChildAdded(model: Album) {
-                adapter.add(model)
-            }
-
-            override fun onChildChanged(model: Album) {
-                adapter.changed(model)
-            }
-
-            override fun onChildRemoved(id: String) {
-                Utils.print("onChildRemoved 2 $id")
-                adapter.remove(id)
-            }
-
-            override fun onChildMoved(model: Album) {
-                Utils.print("onChildMoved ${model.titulo}")
-            }
-        })
-
         if(currentUser == null) {
             return
         }
 
-        val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference.child(Constants.RefUsers).child(currentUser.uid).child(Constants.RefAlbums)
-        databaseReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    val count = dataSnapshot.childrenCount
-                    Utils.print("Count: $count and ${dataSnapshot.key}")
-
-                    val list: MutableList<Album> = ArrayList()
-                    for(snapshot in dataSnapshot.children) {
-                        Utils.print("Item Key ${snapshot.key}")
-                        val album: Album? = snapshot.getValue(Album::class.java)
-                        if(album != null) {
-                            list.add(album)
-                        }
-                    }
-
-                    adapter.setList(list)
-                } else {
-                    adapter.setList(ArrayList())
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Utils.print("Error $error")
+        FirebaseRepository.instance.getAlbumList(currentUser.uid, object: ItemListener<MutableList<Album>> {
+            override fun onItemSelected(model: MutableList<Album>) {
+                adapter.setList(model)
             }
         })
     }

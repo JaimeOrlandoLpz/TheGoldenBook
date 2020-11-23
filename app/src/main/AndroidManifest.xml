@@ -53,12 +53,22 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".ui.activities.VisualizarEsteLibro"
+            android:name=".ui.activities.VisualizarEsteLibroActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <activity
             android:name=".ui.activities.VisualizarLibros"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.activities.AgregarPaginaActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ui.activities.EditarPaginaActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
