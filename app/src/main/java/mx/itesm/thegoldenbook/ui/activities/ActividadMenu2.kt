@@ -44,11 +44,13 @@ class ActividadMenu2 : AppCompatActivity() {
             }
         })
 
+        /*
         FirebaseRepository.instance.getCount(currentUser, object: ItemListener<Long> {
             override fun onItemSelected(model: Long) {
                 //count = model
             }
         })
+        */
 
         btnCrearLibro.setOnClickListener {
             dialogAlbum.create(null)
@@ -85,13 +87,26 @@ class ActividadMenu2 : AppCompatActivity() {
     fun mostrarNombre() {
         val currentUser = Settings.getCurrentUser()
         if(currentUser != null) {
-            val text = if(currentUser.nombre.isEmpty()) {
-                "Hola usuario"
-            } else {
-                "Hola, " + currentUser.nombre
-            }
+            FirebaseRepository.instance.getUser(currentUser.uid, object: ItemListener<Owner> {
+                override fun onItemSelected(model: Owner) {
+                    Utils.print("User uid ${model.uid}")
+                    Utils.print("User nombre ${model.nombre}")
+                    Utils.print("User email ${model.email}")
+                    Utils.print("User fotoPerfil ${model.fotoPerfil}")
+                    Utils.print("User fechaNacimiento ${model.fechaNacimiento}")
 
-            tvUserName.text = text
+                    Settings.setCurrentUser(model)
+                    Settings.setLogged(true)
+
+                    val text = if(model.nombre.isEmpty()) {
+                        "Hola usuario"
+                    } else {
+                        "Hola, " + model.nombre
+                    }
+
+                    tvUserName.text = text
+                }
+            })
         } else {
             logout()
         }

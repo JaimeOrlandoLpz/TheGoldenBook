@@ -247,4 +247,23 @@ class FirebaseRepository private constructor() {
             }
         })
     }
+
+    fun getUser(ownerId: String, listener: ItemListener<Owner>) {
+        val databaseReference = FirebaseDatabase.getInstance().reference.child(Constants.RefUsers).child(ownerId)
+        databaseReference.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    val owner = dataSnapshot.getValue(Owner::class.java)
+
+                    if(owner != null) {
+                        listener.onItemSelected(owner)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Utils.print("onCancelled: $error")
+            }
+        })
+    }
 }

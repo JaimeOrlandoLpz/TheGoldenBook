@@ -9,6 +9,14 @@ data class Owner(
     val fotoPerfil: String,
     val fechaNacimiento: Long
 ) {
+    constructor() : this(
+        "",
+        "",
+        "",
+        "",
+        0L
+    )
+
     @Exclude
     fun toMap(): Map<String, Any> {
         val result: HashMap<String, Any> = HashMap()
