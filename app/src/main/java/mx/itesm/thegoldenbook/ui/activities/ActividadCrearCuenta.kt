@@ -13,10 +13,7 @@ import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FacebookAuthProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.*
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.application.Settings
 import mx.itesm.thegoldenbook.models.Owner
@@ -152,8 +149,23 @@ class ActividadCrearCuenta: AppCompatActivity() {
                 val currentUser = auth.currentUser
                 updateUI(currentUser, true)
             } else {
+                if (task.exception is FirebaseAuthWeakPasswordException) {
+                    Toast.makeText(
+                        this@ActividadCrearCuenta,
+                        "La contraseña, debe ser de al menos 6 caracteres.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else if(task.exception is FirebaseAuthInvalidCredentialsException) {
+                    Toast.makeText(
+                        this@ActividadCrearCuenta,
+                        "El formato de correo electrónico es invalido.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(this@ActividadCrearCuenta, "El correo '$email' ha sido usado actualmente para otra cuenta.", Toast.LENGTH_LONG).show()
+                }
+
                 Utils.print(task.exception.toString())
-                Toast.makeText(this@ActividadCrearCuenta, "El correo '$email' ha sido usado actualmente para otra cuenta.", Toast.LENGTH_LONG).show()
             }
         }
     }

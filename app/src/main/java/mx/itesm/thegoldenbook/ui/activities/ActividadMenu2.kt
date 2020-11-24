@@ -61,7 +61,7 @@ class ActividadMenu2 : AppCompatActivity() {
         }
 
         btnPerfil.setOnClickListener {
-            startActivity(Intent(this, InfoUsuario::class.java))
+            startActivity(Intent(this, InfoUsuarioActivity::class.java))
         }
 
         btnLogout.setOnClickListener {

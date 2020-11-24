@@ -9,6 +9,7 @@ import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.application.Settings
 import mx.itesm.thegoldenbook.models.Owner
@@ -19,7 +20,9 @@ import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
-class InfoUsuario : AppCompatActivity() {
+class InfoUsuarioActivity : AppCompatActivity() {
+    private val auth = FirebaseAuth.getInstance()
+
     private lateinit var edtNombre: EditText
     private lateinit var edtEmail: EditText
     private lateinit var btnFechaNacimiento: Button
@@ -68,6 +71,12 @@ class InfoUsuario : AppCompatActivity() {
                     val owner = Owner(account.uid, nombre, email, account.fotoPerfil, timestamp.time)
                     Utils.print(owner.fechaNacimiento.toString())
                     FirebaseRepository.instance.update(this, owner)
+
+                    auth.currentUser?.updateEmail(email)?.addOnSuccessListener {
+                        Utils.print("Cambio de correo exitoso")
+                    }?.addOnFailureListener {
+                        Utils.print(it.toString())
+                    }
                 } catch (ex: Exception) {
                     Utils.print(ex.toString())
                 }

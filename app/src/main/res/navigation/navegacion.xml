@@ -96,7 +96,7 @@
         tools:layout="@layout/activity_visualizar_este_libro" />
     <activity
         android:id="@+id/infoUsuario"
-        android:name="mx.itesm.thegoldenbook.ui.activities.InfoUsuario"
+        android:name="mx.itesm.thegoldenbook.ui.activities.InfoUsuarioActivity"
         android:label="activity_info_usuario"
         tools:layout="@layout/activity_info_usuario" />
 </navigation>
