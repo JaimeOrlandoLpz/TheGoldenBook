@@ -26,7 +26,6 @@ import mx.itesm.thegoldenbook.repositories.FirebaseRepository
 import mx.itesm.thegoldenbook.utils.Utils
 import java.io.ByteArrayOutputStream
 
-
 class ActividadLogin : AppCompatActivity() {
     private val permissions: ArrayList<String> = ArrayList()
     private val auth = FirebaseAuth.getInstance()

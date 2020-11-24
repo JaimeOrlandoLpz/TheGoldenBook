@@ -93,24 +93,27 @@ class FirebaseRepository private constructor() {
         }
     }
 
-    fun insert(ownerId: String, album: Album, pagina: Pagina) {
+    fun insert(ownerId: String, albumId: String, pagina: Pagina, listener: ItemListener<Boolean>) {
         val firebaseDatabase = FirebaseDatabase.getInstance()
         val databaseReference: DatabaseReference = firebaseDatabase.reference
             .child(Constants.RefUsers)
             .child(ownerId)
             .child(Constants.RefAlbums)
-            .child(album.albumId)
+            .child(albumId)
             .child(Constants.RefPages)
             .push()
 
         val paginaId = databaseReference.key
 
         if(paginaId != null) {
-            val rutaPortada = ""
             val fechaCreacion = System.currentTimeMillis()
-            val item = Pagina(paginaId, album.albumId, pagina.texto, pagina.rutaImagen, fechaCreacion)
+            val item = Pagina(paginaId, albumId, pagina.texto, pagina.rutaImagen, fechaCreacion)
 
-            databaseReference.setValue(item)
+            databaseReference.setValue(item).addOnSuccessListener {
+                listener.onItemSelected(true)
+            }.addOnFailureListener {
+                listener.onItemSelected(false)
+            }
         }
     }
 
