@@ -54,11 +54,12 @@ class VisualizarEsteLibroActivity : AppCompatActivity() {
         fab = findViewById(R.id.fab)
 
         adapter = PaginaAdapter(this, object: ItemListener<Pagina> {
-            override fun onItemSelected(model: Pagina) {
+            override fun onItemSelected(position: Int, model: Pagina) {
                 val intent = Intent()
-                intent.setClass(this@VisualizarEsteLibroActivity, EditarPaginaActivity::class.java)
+                intent.setClass(this@VisualizarEsteLibroActivity, VistaPreviaActivity::class.java)
                 intent.putExtra(Constants.ParamAlbumId, albumId)
                 intent.putExtra(Constants.ParamPaginaId, model.paginaId)
+                intent.putExtra(Constants.ParamPosition, position)
                 startActivity(intent)
                 Utils.print("Pagina: ${model.paginaId}")
             }

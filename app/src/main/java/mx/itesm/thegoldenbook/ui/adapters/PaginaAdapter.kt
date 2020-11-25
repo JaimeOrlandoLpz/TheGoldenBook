@@ -31,7 +31,7 @@ class PaginaAdapter(
         Glide.with(context).load(gsReference).into(holder.ivPagina)
 
         holder.cvContainer.setOnClickListener {
-            listener.onItemSelected(item)
+            listener.onItemSelected(holder.adapterPosition, item)
         }
     }
 
