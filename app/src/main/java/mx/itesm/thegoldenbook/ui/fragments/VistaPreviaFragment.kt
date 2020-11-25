@@ -38,7 +38,7 @@ class VistaPreviaFragment: Fragment() {
         val pagina: Pagina = gson.fromJson(json, type) ?: return
 
         val storage = FirebaseStorage.getInstance()
-        val gsReference = storage.getReferenceFromUrl("gs://goldenbook-3ae2f.appspot.com/photo_album.png")
+        val gsReference = storage.getReferenceFromUrl(Constants.BUCKET + pagina.rutaImagen)
         Glide.with(requireContext()).load(gsReference).into(ivPaginaImagen)
 
         tvDescription.text = pagina.texto

@@ -93,7 +93,7 @@ class FirebaseRepository private constructor() {
         }
     }
 
-    fun insert(ownerId: String, pagina: Pagina, listener: ItemListener<Boolean>) {
+    fun insert(ownerId: String, pagina: Pagina, listener: ItemListener<Pagina?>) {
         val firebaseDatabase = FirebaseDatabase.getInstance()
         val databaseReference: DatabaseReference = firebaseDatabase.reference
             .child(Constants.RefUsers)
@@ -110,9 +110,9 @@ class FirebaseRepository private constructor() {
             val item = Pagina(paginaId, pagina.albumId, pagina.texto, pagina.rutaImagen, fechaCreacion)
 
             databaseReference.setValue(item).addOnSuccessListener {
-                listener.onItemSelected(true)
+                listener.onItemSelected(item)
             }.addOnFailureListener {
-                listener.onItemSelected(false)
+                listener.onItemSelected(null)
             }
         }
     }
@@ -152,14 +152,10 @@ class FirebaseRepository private constructor() {
             .child(Constants.RefPages)
             .child(pagina.paginaId)
             .updateChildren(pagina.toMap())
-            .addOnCompleteListener {
-                Utils.print("Correcto")
-            }.addOnSuccessListener {
-                Utils.print("OnSuccess")
+            .addOnSuccessListener {
+                listener.onItemSelected(true)
             }.addOnFailureListener {
-                Utils.print(it.toString())
-            }.addOnCanceledListener {
-                Utils.print("OnCancel")
+                listener.onItemSelected(false)
             }
     }
 
@@ -185,21 +181,21 @@ class FirebaseRepository private constructor() {
         })
     }
 
-    fun delete(ownerId: String, albumId: String, pagina: Pagina) {
+    fun delete(ownerId: String, pagina: Pagina) {
         val firebaseDatabase = FirebaseDatabase.getInstance()
         val databaseReference = firebaseDatabase.reference
             .child(Constants.RefUsers)
             .child(ownerId)
             .child(Constants.RefAlbums)
-            .child(albumId)
+            .child(pagina.albumId)
             .child(Constants.RefPages)
             .child(pagina.paginaId)
 
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (snapshot in dataSnapshot.children) {
-                    Utils.print("Remove ${snapshot.key}")
-                    snapshot.ref.removeValue()
+                    Utils.print("Delete ${snapshot.key}")
+                    //snapshot.ref.removeValue()
                 }
             }
 
@@ -218,6 +214,28 @@ class FirebaseRepository private constructor() {
         val imageRef: StorageReference = storageRef.child(fileName)
 
         var uploadTask = imageRef.putBytes(byteArray)
+
+        // Create a reference to 'images/mountains.jpg'
+        //val mountainImagesRef: StorageReference = storageRef.child("images/mountains.jpg")
+    }
+
+    fun uploadImage(fileName: String, byteArray: ByteArray, listener: ItemListener<Boolean>) {
+        val storage = Firebase.storage
+        // Create a storage reference from our app
+        val storageRef: StorageReference = storage.reference
+
+        // Create a reference to "mountains.jpg"
+        val imageRef: StorageReference = storageRef.child(fileName)
+
+        val uploadTask = imageRef.putBytes(byteArray)
+
+        uploadTask.addOnCompleteListener {
+            listener.onItemSelected(true)
+        }
+
+        uploadTask.addOnFailureListener {
+            listener.onItemSelected(false)
+        }
 
         // Create a reference to 'images/mountains.jpg'
         //val mountainImagesRef: StorageReference = storageRef.child("images/mountains.jpg")

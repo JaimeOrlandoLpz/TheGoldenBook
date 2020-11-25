@@ -36,7 +36,8 @@
                 android:id="@+id/ivAlbum"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@color/backgroundFooter"
+                android:background="@color/colorBlack"
+                android:src="@drawable/ic_photo_album"
                 android:contentDescription="@string/app_name" />
 
         </LinearLayout>

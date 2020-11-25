@@ -2,14 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient">
+    android:background="@color/colorBlack">
 
     <ImageView
         android:id="@+id/ivPaginaImagen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_album"
-        android:layout_margin="10dp"
+        android:src="@drawable/ic_photo_album"
         android:layout_above="@id/tvDescription"
         android:contentDescription="@string/app_name" />
 

@@ -11,6 +11,7 @@ import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.interfaces.ItemListener
 import mx.itesm.thegoldenbook.models.Pagina
 import mx.itesm.thegoldenbook.ui.viewholders.PaginaHolder
+import mx.itesm.thegoldenbook.utils.Constants
 
 class PaginaAdapter(
     private val context: Context,
@@ -27,7 +28,7 @@ class PaginaAdapter(
         val item: Pagina = list[position]
 
         val storage = FirebaseStorage.getInstance()
-        val gsReference = storage.getReferenceFromUrl("gs://goldenbook-3ae2f.appspot.com/photo_album.png")
+        val gsReference = storage.getReferenceFromUrl(Constants.BUCKET + item.rutaImagen)
         Glide.with(context).load(gsReference).into(holder.ivPagina)
 
         holder.cvContainer.setOnClickListener {
