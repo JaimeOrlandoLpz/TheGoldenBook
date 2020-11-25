@@ -10,6 +10,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.application.Settings
 import mx.itesm.thegoldenbook.interfaces.ItemListener
+import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.models.Pagina
 import mx.itesm.thegoldenbook.repositories.FirebaseRepository
 import mx.itesm.thegoldenbook.ui.adapters.PaginaAdapter
@@ -80,5 +81,11 @@ class VisualizarEsteLibroActivity : AppCompatActivity() {
             intent.putExtra(Constants.ParamAlbumId, albumId)
             startActivity(intent)
         }
+
+        FirebaseRepository.instance.getAlbum(currentUser.uid, albumId, object: ItemListener<Album> {
+            override fun onItemSelected(model: Album) {
+                tvTituloLibro.text = model.titulo
+            }
+        })
     }
 }

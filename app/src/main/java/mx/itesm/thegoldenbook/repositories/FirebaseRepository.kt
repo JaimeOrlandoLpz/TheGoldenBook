@@ -478,6 +478,29 @@ class FirebaseRepository private constructor() {
         })
     }
 
+    fun getAlbum(ownerId: String, albumId: String, listener: ItemListener<Album>) {
+        val databaseReference = FirebaseDatabase.getInstance().reference
+            .child(Constants.RefUsers)
+            .child(ownerId)
+            .child(Constants.RefAlbums)
+            .child(albumId)
+        databaseReference.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    val album = dataSnapshot.getValue(Album::class.java)
+
+                    if(album != null) {
+                        listener.onItemSelected(album)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Utils.print("onCancelled: $error")
+            }
+        })
+    }
+
     fun getPagina(ownerId: String, albumId: String, paginaId: String, listener: ItemListener<Pagina>) {
         val databaseReference = FirebaseDatabase.getInstance().reference
             .child(Constants.RefUsers)
