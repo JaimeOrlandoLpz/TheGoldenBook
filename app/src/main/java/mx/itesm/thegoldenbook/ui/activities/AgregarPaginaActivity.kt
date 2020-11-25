@@ -11,6 +11,7 @@ import mx.itesm.thegoldenbook.application.Settings
 import mx.itesm.thegoldenbook.interfaces.ItemListener
 import mx.itesm.thegoldenbook.models.Pagina
 import mx.itesm.thegoldenbook.repositories.FirebaseRepository
+import mx.itesm.thegoldenbook.utils.Constants
 import mx.itesm.thegoldenbook.utils.Utils
 
 class AgregarPaginaActivity: AppCompatActivity() {
@@ -22,6 +23,21 @@ class AgregarPaginaActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_pagina)
+
+        val intent = intent
+        val bundle = intent.extras
+
+        if(bundle == null) {
+            finish()
+            return
+        }
+
+        val albumId = bundle.getString(Constants.ParamAlbumId)
+
+        if(albumId == null) {
+            finish()
+            return
+        }
 
         ivPaginaImagen = findViewById(R.id.ivPaginaImagen)
         edtDescripcion = findViewById(R.id.edtDescripcion)
@@ -46,11 +62,10 @@ class AgregarPaginaActivity: AppCompatActivity() {
             } else {
                 if(imagenValida) {
                     val paginaId = "paginaId"
-                    val albumId = "testId"
                     val rutaImagen = "rutaImagen"
                     val fechaCreacion = System.currentTimeMillis()
 
-                    FirebaseRepository.instance.insert(account.uid, "testId", Pagina(paginaId, albumId, description, rutaImagen, fechaCreacion), object: ItemListener<Boolean> {
+                    FirebaseRepository.instance.insert(account.uid, Pagina(paginaId, albumId, description, rutaImagen, fechaCreacion), object: ItemListener<Boolean> {
                         override fun onItemSelected(model: Boolean) {
                             if(model) {
                                 finish()

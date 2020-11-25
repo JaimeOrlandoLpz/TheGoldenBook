@@ -55,6 +55,11 @@ class VisualizarEsteLibroActivity : AppCompatActivity() {
 
         adapter = PaginaAdapter(this, object: ItemListener<Pagina> {
             override fun onItemSelected(model: Pagina) {
+                val intent = Intent()
+                intent.setClass(this@VisualizarEsteLibroActivity, EditarPaginaActivity::class.java)
+                intent.putExtra(Constants.ParamAlbumId, albumId)
+                intent.putExtra(Constants.ParamPaginaId, model.paginaId)
+                startActivity(intent)
                 Utils.print("Pagina: ${model.paginaId}")
             }
         })
@@ -69,7 +74,10 @@ class VisualizarEsteLibroActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         fab.setOnClickListener {
-            startActivity(Intent(this, AgregarPaginaActivity::class.java))
+            val intent = Intent()
+            intent.setClass(this, AgregarPaginaActivity::class.java)
+            intent.putExtra(Constants.ParamAlbumId, albumId)
+            startActivity(intent)
         }
     }
 }

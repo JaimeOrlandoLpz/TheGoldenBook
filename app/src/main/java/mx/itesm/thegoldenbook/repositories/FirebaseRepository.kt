@@ -93,13 +93,13 @@ class FirebaseRepository private constructor() {
         }
     }
 
-    fun insert(ownerId: String, albumId: String, pagina: Pagina, listener: ItemListener<Boolean>) {
+    fun insert(ownerId: String, pagina: Pagina, listener: ItemListener<Boolean>) {
         val firebaseDatabase = FirebaseDatabase.getInstance()
         val databaseReference: DatabaseReference = firebaseDatabase.reference
             .child(Constants.RefUsers)
             .child(ownerId)
             .child(Constants.RefAlbums)
-            .child(albumId)
+            .child(pagina.albumId)
             .child(Constants.RefPages)
             .push()
 
@@ -107,7 +107,7 @@ class FirebaseRepository private constructor() {
 
         if(paginaId != null) {
             val fechaCreacion = System.currentTimeMillis()
-            val item = Pagina(paginaId, albumId, pagina.texto, pagina.rutaImagen, fechaCreacion)
+            val item = Pagina(paginaId, pagina.albumId, pagina.texto, pagina.rutaImagen, fechaCreacion)
 
             databaseReference.setValue(item).addOnSuccessListener {
                 listener.onItemSelected(true)
@@ -139,7 +139,7 @@ class FirebaseRepository private constructor() {
             }
     }
 
-    fun update(ownerId: String, albumId: String, pagina: Pagina) {
+    fun update(ownerId: String, pagina: Pagina, listener: ItemListener<Boolean>) {
         val databaseReference: DatabaseReference
         val firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase.reference
@@ -148,7 +148,7 @@ class FirebaseRepository private constructor() {
             .child(Constants.RefUsers)
             .child(ownerId)
             .child(Constants.RefAlbums)
-            .child(albumId)
+            .child(pagina.albumId)
             .child(Constants.RefPages)
             .child(pagina.paginaId)
             .updateChildren(pagina.toMap())
@@ -468,6 +468,31 @@ class FirebaseRepository private constructor() {
 
                     if(owner != null) {
                         listener.onItemSelected(owner)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Utils.print("onCancelled: $error")
+            }
+        })
+    }
+
+    fun getPagina(ownerId: String, albumId: String, paginaId: String, listener: ItemListener<Pagina>) {
+        val databaseReference = FirebaseDatabase.getInstance().reference
+            .child(Constants.RefUsers)
+            .child(ownerId)
+            .child(Constants.RefAlbums)
+            .child(albumId)
+            .child(Constants.RefPages)
+            .child(paginaId)
+        databaseReference.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if(dataSnapshot.exists()) {
+                    val pagina = dataSnapshot.getValue(Pagina::class.java)
+
+                    if(pagina != null) {
+                        listener.onItemSelected(pagina)
                     }
                 }
             }

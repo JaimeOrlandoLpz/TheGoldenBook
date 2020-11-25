@@ -7,5 +7,6 @@ class Constants {
         const val RefPages = "Pages"
 
         const val ParamAlbumId = "albumId"
+        const val ParamPaginaId = "paginaId"
     }
 }

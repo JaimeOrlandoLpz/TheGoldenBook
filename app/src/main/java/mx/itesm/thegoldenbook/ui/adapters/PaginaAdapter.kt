@@ -19,7 +19,7 @@ class PaginaAdapter(
     private var list: MutableList<Pagina> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaginaHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_content_album, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_content_pagina, parent, false)
         return PaginaHolder(view)
     }
 
@@ -31,7 +31,7 @@ class PaginaAdapter(
         Glide.with(context).load(gsReference).into(holder.ivPagina)
 
         holder.cvContainer.setOnClickListener {
-            listener.onItemSelected(it, item)
+            listener.onItemSelected(item)
         }
     }
 

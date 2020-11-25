@@ -20,7 +20,8 @@
         android:src="@drawable/ic_album"
         android:layout_margin="10dp"
         android:layout_above="@id/edtDescripcion"
-        android:layout_below="@id/tvTituloPagina"/>
+        android:layout_below="@id/tvTituloPagina"
+        android:contentDescription="@string/app_name" />
 
     <EditText
         android:id="@+id/edtDescripcion"
@@ -30,6 +31,7 @@
         android:lines="5"
         android:textColorHint="@color/colorWhite"
         android:layout_above="@id/fab"
+        android:importantForAutofill="no"
         android:hint="Descripción" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
