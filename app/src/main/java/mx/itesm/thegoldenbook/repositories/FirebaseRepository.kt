@@ -74,7 +74,7 @@ class FirebaseRepository private constructor() {
         })
     }
 
-    fun insert(ownerId: String, album: Album) {
+    fun insert(ownerId: String, album: Album, listener: ItemListener<Album?>) {
         val firebaseDatabase = FirebaseDatabase.getInstance()
         val databaseReference: DatabaseReference = firebaseDatabase.reference
             .child(Constants.RefUsers)
@@ -85,11 +85,14 @@ class FirebaseRepository private constructor() {
         val albumId = databaseReference.key
 
         if(albumId != null) {
-            val rutaPortada = ""
             val fechaCreacion = System.currentTimeMillis()
-            val item = Album(albumId, ownerId, album.titulo, rutaPortada, fechaCreacion)
+            val item = Album(albumId, ownerId, album.titulo, album.rutaPortada, fechaCreacion)
 
-            databaseReference.setValue(item)
+            databaseReference.setValue(item).addOnSuccessListener {
+                listener.onItemSelected(item)
+            }.addOnFailureListener {
+                listener.onItemSelected(null)
+            }
         }
     }
 
@@ -117,7 +120,7 @@ class FirebaseRepository private constructor() {
         }
     }
 
-    fun update(album: Album) {
+    fun update(album: Album, listener: ItemListener<Boolean>) {
         val databaseReference: DatabaseReference
         val firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase.reference
@@ -126,16 +129,13 @@ class FirebaseRepository private constructor() {
             .child(Constants.RefUsers)
             .child(album.ownerId)
             .child(Constants.RefAlbums)
-            .child(album.albumId.toString())
+            .child(album.albumId)
             .updateChildren(album.toMap())
-            .addOnCompleteListener {
-                Utils.print("Correcto")
-            }.addOnSuccessListener {
-                Utils.print("OnSuccess")
+            .addOnSuccessListener {
+                listener.onItemSelected(true)
             }.addOnFailureListener {
                 Utils.print(it.toString())
-            }.addOnCanceledListener {
-                Utils.print("OnCancel")
+                listener.onItemSelected(false)
             }
     }
 

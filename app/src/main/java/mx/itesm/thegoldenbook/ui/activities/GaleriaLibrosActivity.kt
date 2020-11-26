@@ -12,15 +12,12 @@ import mx.itesm.thegoldenbook.interfaces.ItemListener
 import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.repositories.FirebaseRepository
 import mx.itesm.thegoldenbook.ui.adapters.AlbumsAdapter
-import mx.itesm.thegoldenbook.ui.dialogs.AlbumDialog
 import mx.itesm.thegoldenbook.ui.dialogs.DeleteAlbumDialog
 import mx.itesm.thegoldenbook.utils.Constants
-import mx.itesm.thegoldenbook.utils.Utils
 
 class GaleriaLibrosActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AlbumsAdapter
-    private lateinit var dialogAlbum: AlbumDialog.Companion.Builder
     private lateinit var dialogDeleteAlbum: DeleteAlbumDialog.Companion.Builder
     private lateinit var layoutManager: LinearLayoutManager
 
@@ -29,13 +26,6 @@ class GaleriaLibrosActivity : AppCompatActivity() {
         setContentView(R.layout.activity_galeria_libros)
 
         val currentUser = Settings.getCurrentUser()
-
-        dialogAlbum = AlbumDialog.Companion.Builder(this, object: ItemListener<Album> {
-            override fun onItemSelected(model: Album) {
-                Utils.print("Actualizar id: " + model.albumId)
-                FirebaseRepository.instance.update(model)
-            }
-        })
 
         dialogDeleteAlbum = DeleteAlbumDialog.Companion.Builder(this, object: ItemListener<Album> {
             override fun onItemSelected(model: Album) {
@@ -53,7 +43,7 @@ class GaleriaLibrosActivity : AppCompatActivity() {
                     intent.setClass(this@GaleriaLibrosActivity, VisualizarEsteLibroActivity::class.java)
                     startActivity(intent)
                 } else if(view.id == R.id.btnEditar) {
-                    dialogAlbum.create(model)
+                    //dialogAlbum.create(model)
                 } else if(view.id == R.id.btnBorrar) {
                     dialogDeleteAlbum.create(model)
                 }

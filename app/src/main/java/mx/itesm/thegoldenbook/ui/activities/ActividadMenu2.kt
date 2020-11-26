@@ -10,10 +10,8 @@ import com.google.firebase.auth.FirebaseAuth
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.application.Settings
 import mx.itesm.thegoldenbook.interfaces.ItemListener
-import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.models.Owner
 import mx.itesm.thegoldenbook.repositories.FirebaseRepository
-import mx.itesm.thegoldenbook.ui.dialogs.AlbumDialog
 import mx.itesm.thegoldenbook.utils.Utils
 
 class ActividadMenu2 : AppCompatActivity() {
@@ -22,7 +20,6 @@ class ActividadMenu2 : AppCompatActivity() {
     private lateinit var btnGaleria: Button
     private lateinit var btnPerfil: Button
     private lateinit var btnLogout: Button
-    private lateinit var dialogAlbum: AlbumDialog.Companion.Builder
     //private var count = -0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,23 +34,8 @@ class ActividadMenu2 : AppCompatActivity() {
 
         val currentUser: Owner? = Settings.getCurrentUser()
 
-        dialogAlbum = AlbumDialog.Companion.Builder(this, object: ItemListener<Album> {
-            override fun onItemSelected(model: Album) {
-                Utils.print("Album titulo: " + model.titulo)
-                FirebaseRepository.instance.insert(currentUser!!.uid, model)
-            }
-        })
-
-        /*
-        FirebaseRepository.instance.getCount(currentUser, object: ItemListener<Long> {
-            override fun onItemSelected(model: Long) {
-                //count = model
-            }
-        })
-        */
-
         btnCrearLibro.setOnClickListener {
-            dialogAlbum.create(null)
+            startActivity(Intent(this, AgregarAlbumActivity::class.java))
         }
 
         btnGaleria.setOnClickListener {
@@ -72,16 +54,6 @@ class ActividadMenu2 : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         mostrarNombre()
-    }
-
-    fun visualizar() {
-        val intent = Intent(this, VisualizarLibros::class.java)
-        startActivity(intent)
-    }
-
-    fun ayudaClicked() {
-        val intent = Intent(this, Ayuda::class.java)
-        startActivity(intent)
     }
 
     fun mostrarNombre() {

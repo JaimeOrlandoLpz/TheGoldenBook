@@ -30,6 +30,7 @@ class PaginaAdapter(
 
         val storage = FirebaseStorage.getInstance()
         val gsReference = storage.getReferenceFromUrl(Constants.BUCKET + item.rutaImagen)
+
         Glide.with(context)
             .load(gsReference)
             .diskCacheStrategy(DiskCacheStrategy.NONE)

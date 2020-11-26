@@ -40,6 +40,7 @@ class VistaPreviaFragment: Fragment() {
 
         val storage = FirebaseStorage.getInstance()
         val gsReference = storage.getReferenceFromUrl(Constants.BUCKET + pagina.rutaImagen)
+
         Glide.with(requireContext())
             .load(gsReference)
             .diskCacheStrategy(DiskCacheStrategy.NONE)

@@ -12,6 +12,7 @@ import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.interfaces.ItemListener
 import mx.itesm.thegoldenbook.models.Album
 import mx.itesm.thegoldenbook.ui.viewholders.AlbumHolder
+import mx.itesm.thegoldenbook.utils.Constants
 
 class AlbumsAdapter(
     private val context: Context,
@@ -30,7 +31,8 @@ class AlbumsAdapter(
         holder.tvAlbumTitle.text = item.titulo
 
         val storage = FirebaseStorage.getInstance()
-        val gsReference = storage.getReferenceFromUrl("gs://goldenbook-3ae2f.appspot.com/album.png")
+        val gsReference = storage.getReferenceFromUrl(Constants.BUCKET + item.rutaPortada)
+
         Glide.with(context)
             .load(gsReference)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
