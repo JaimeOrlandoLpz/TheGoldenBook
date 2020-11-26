@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -39,7 +40,11 @@ class VistaPreviaFragment: Fragment() {
 
         val storage = FirebaseStorage.getInstance()
         val gsReference = storage.getReferenceFromUrl(Constants.BUCKET + pagina.rutaImagen)
-        Glide.with(requireContext()).load(gsReference).into(ivPaginaImagen)
+        Glide.with(requireContext())
+            .load(gsReference)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(ivPaginaImagen)
 
         tvDescription.text = pagina.texto
     }

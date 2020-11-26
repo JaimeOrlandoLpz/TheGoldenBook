@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.storage.FirebaseStorage
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.interfaces.ItemListener
@@ -30,7 +31,11 @@ class AlbumsAdapter(
 
         val storage = FirebaseStorage.getInstance()
         val gsReference = storage.getReferenceFromUrl("gs://goldenbook-3ae2f.appspot.com/album.png")
-        Glide.with(context).load(gsReference).into(holder.ivAlbum)
+        Glide.with(context)
+            .load(gsReference)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(holder.ivAlbum)
 
         holder.cvContainer.setOnClickListener {
             listener.onItemSelected(it, item)

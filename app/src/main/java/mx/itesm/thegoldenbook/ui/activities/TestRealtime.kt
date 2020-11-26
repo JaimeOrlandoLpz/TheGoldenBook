@@ -19,14 +19,10 @@ class TestRealtime: AppCompatActivity() {
         databaseReference = firebaseDatabase.reference
 
         val owner = Owner("test", "Roberto Martinez Roman", "rmroman@tec.mx", "https://www.google.com", System.currentTimeMillis());
-        databaseReference.child("Users").setValue(owner).addOnCompleteListener {
-            Utils.print("Correcto")
-        }.addOnSuccessListener {
+        databaseReference.child("Users").setValue(owner).addOnSuccessListener {
             Utils.print("OnSuccess")
         }.addOnFailureListener {
             Utils.print(it.toString())
-        }.addOnCanceledListener {
-            Utils.print("OnCancel")
         }
     }
 }

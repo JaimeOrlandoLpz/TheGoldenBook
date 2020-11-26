@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.application.Settings
@@ -132,7 +133,11 @@ class AgregarPaginaActivity: AppCompatActivity() {
             val inputStream: InputStream = contentResolver.openInputStream(imageUri) ?: return
             bitmap = BitmapFactory.decodeStream(inputStream)
 
-            Glide.with(this).load(bitmap).into(ivPaginaImagen)
+            Glide.with(applicationContext)
+                .load(bitmap)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(ivPaginaImagen)
             imagenValida = true
         } catch (ex: Exception) {
             imagenValida = false

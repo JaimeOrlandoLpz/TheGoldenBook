@@ -149,7 +149,7 @@ class ActividadCrearCuenta: AppCompatActivity() {
                 val currentUser = auth.currentUser
                 updateUI(currentUser, true)
             } else {
-                if (task.exception is FirebaseAuthWeakPasswordException) {
+                if(task.exception is FirebaseAuthWeakPasswordException) {
                     Toast.makeText(
                         this@ActividadCrearCuenta,
                         "La contraseña, debe ser de al menos 6 caracteres.",

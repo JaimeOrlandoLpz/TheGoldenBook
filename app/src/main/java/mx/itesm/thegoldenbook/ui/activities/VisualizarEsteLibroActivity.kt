@@ -2,6 +2,7 @@ package mx.itesm.thegoldenbook.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,11 +12,11 @@ import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.application.Settings
 import mx.itesm.thegoldenbook.interfaces.ItemListener
 import mx.itesm.thegoldenbook.models.Album
+import mx.itesm.thegoldenbook.models.Owner
 import mx.itesm.thegoldenbook.models.Pagina
 import mx.itesm.thegoldenbook.repositories.FirebaseRepository
 import mx.itesm.thegoldenbook.ui.adapters.PaginaAdapter
 import mx.itesm.thegoldenbook.utils.Constants
-import mx.itesm.thegoldenbook.utils.Utils
 
 class VisualizarEsteLibroActivity : AppCompatActivity() {
     private lateinit var tvTituloLibro: TextView
@@ -23,6 +24,9 @@ class VisualizarEsteLibroActivity : AppCompatActivity() {
     private lateinit var fab: ExtendedFloatingActionButton
 
     private lateinit var adapter: PaginaAdapter
+
+    private var albumId: String = ""
+    private lateinit var currentUser: Owner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,39 +40,30 @@ class VisualizarEsteLibroActivity : AppCompatActivity() {
             return
         }
 
-        val albumId = bundle.getString(Constants.ParamAlbumId)
+        albumId = bundle.getString(Constants.ParamAlbumId)!!
 
-        if(albumId == null) {
-            finish()
-            return
-        }
-
-        val currentUser = Settings.getCurrentUser()
-
-        if(currentUser == null) {
-            finish()
-            return
-        }
+        currentUser = Settings.getCurrentUser()!!
 
         tvTituloLibro = findViewById(R.id.tvTituloLibro)
         recyclerView = findViewById(R.id.recyclerView)
         fab = findViewById(R.id.fab)
 
         adapter = PaginaAdapter(this, object: ItemListener<Pagina> {
-            override fun onItemSelected(position: Int, model: Pagina) {
-                val intent = Intent()
-                intent.setClass(this@VisualizarEsteLibroActivity, VistaPreviaActivity::class.java)
-                intent.putExtra(Constants.ParamAlbumId, albumId)
-                intent.putExtra(Constants.ParamPaginaId, model.paginaId)
-                intent.putExtra(Constants.ParamPosition, position)
-                startActivity(intent)
-                Utils.print("Pagina: ${model.paginaId}")
-            }
-        })
-
-        FirebaseRepository.instance.getPaginasList(currentUser.uid, albumId, object: ItemListener<MutableList<Pagina>> {
-            override fun onItemSelected(model: MutableList<Pagina>) {
-                adapter.setList(model)
+            override fun onItemSelected(view: View, position: Int, model: Pagina) {
+                if(view.id == R.id.cvContainer) {
+                    val intent = Intent()
+                    intent.setClass(this@VisualizarEsteLibroActivity, VistaPreviaActivity::class.java)
+                    intent.putExtra(Constants.ParamAlbumId, albumId)
+                    intent.putExtra(Constants.ParamPaginaId, model.paginaId)
+                    intent.putExtra(Constants.ParamPosition, position)
+                    startActivity(intent)
+                } else {
+                    val intent = Intent()
+                    intent.setClass(this@VisualizarEsteLibroActivity, EditarPaginaActivity::class.java)
+                    intent.putExtra(Constants.ParamAlbumId, albumId)
+                    intent.putExtra(Constants.ParamPaginaId, model.paginaId)
+                    startActivity(intent)
+                }
             }
         })
 
@@ -85,6 +80,16 @@ class VisualizarEsteLibroActivity : AppCompatActivity() {
         FirebaseRepository.instance.getAlbum(currentUser.uid, albumId, object: ItemListener<Album> {
             override fun onItemSelected(model: Album) {
                 tvTituloLibro.text = model.titulo
+            }
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        FirebaseRepository.instance.getPaginasList(currentUser.uid, albumId, object: ItemListener<MutableList<Pagina>> {
+            override fun onItemSelected(model: MutableList<Pagina>) {
+                adapter.setList(model)
             }
         })
     }

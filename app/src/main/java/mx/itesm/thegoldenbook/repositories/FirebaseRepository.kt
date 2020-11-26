@@ -220,6 +220,8 @@ class FirebaseRepository private constructor() {
     }
 
     fun uploadImage(fileName: String, byteArray: ByteArray, listener: ItemListener<Boolean>) {
+        Utils.print("Cargando imagen: $fileName")
+
         val storage = Firebase.storage
         // Create a storage reference from our app
         val storageRef: StorageReference = storage.reference
@@ -229,7 +231,7 @@ class FirebaseRepository private constructor() {
 
         val uploadTask = imageRef.putBytes(byteArray)
 
-        uploadTask.addOnCompleteListener {
+        uploadTask.addOnSuccessListener {
             listener.onItemSelected(true)
         }
 
@@ -239,6 +241,24 @@ class FirebaseRepository private constructor() {
 
         // Create a reference to 'images/mountains.jpg'
         //val mountainImagesRef: StorageReference = storageRef.child("images/mountains.jpg")
+    }
+
+    fun deleteImage(fileName: String, listener: ItemListener<Boolean>) {
+        Utils.print("Borrando imagen: $fileName")
+
+        val storage = Firebase.storage
+        val storageRef: StorageReference = storage.reference
+        val imageRef: StorageReference = storageRef.child(fileName)
+
+        val uploadTask = imageRef.delete()
+
+        uploadTask.addOnSuccessListener {
+            listener.onItemSelected(true)
+        }
+
+        uploadTask.addOnFailureListener {
+            listener.onItemSelected(false)
+        }
     }
 
     fun getAlbums(context: Context, owner: Owner?, listener: ChildListener<Album>) {

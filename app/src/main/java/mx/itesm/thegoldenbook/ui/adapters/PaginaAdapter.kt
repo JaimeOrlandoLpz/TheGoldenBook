@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.storage.FirebaseStorage
 import mx.itesm.thegoldenbook.R
 import mx.itesm.thegoldenbook.interfaces.ItemListener
@@ -29,10 +30,18 @@ class PaginaAdapter(
 
         val storage = FirebaseStorage.getInstance()
         val gsReference = storage.getReferenceFromUrl(Constants.BUCKET + item.rutaImagen)
-        Glide.with(context).load(gsReference).into(holder.ivPagina)
+        Glide.with(context)
+            .load(gsReference)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(holder.ivPagina)
 
         holder.cvContainer.setOnClickListener {
-            listener.onItemSelected(holder.adapterPosition, item)
+            listener.onItemSelected(it, holder.adapterPosition, item)
+        }
+
+        holder.ivEdit.setOnClickListener {
+            listener.onItemSelected(it, holder.adapterPosition, item)
         }
     }
 
