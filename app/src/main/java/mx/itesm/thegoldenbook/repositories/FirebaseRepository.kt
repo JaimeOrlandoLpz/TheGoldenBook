@@ -257,7 +257,7 @@ class FirebaseRepository private constructor() {
         }
 
         uploadTask.addOnFailureListener {
-            listener.onItemSelected(false)
+            listener.onItemSelected(true)
         }
     }
 
