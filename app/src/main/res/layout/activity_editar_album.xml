@@ -5,32 +5,34 @@
     android:background="@drawable/gradient">
 
     <TextView
-        android:id="@+id/tvTituloPagina"
+        android:id="@+id/tvTituloAlbum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Nueva página"
+        android:text="Editar álbum"
         android:textSize="@dimen/textSizeBig"
         android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:id="@+id/ivPaginaImagen"
+        android:id="@+id/ivAlbumImagen"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:src="@drawable/ic_album"
         android:background="@color/colorBlack"
         android:layout_margin="10dp"
         android:layout_above="@id/edtDescripcion"
-        android:layout_below="@id/tvTituloPagina"/>
+        android:layout_below="@id/tvTituloAlbum"
+        android:contentDescription="@string/app_name" />
 
     <EditText
         android:id="@+id/edtDescripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:lines="5"
+        android:lines="1"
         android:textColorHint="@color/colorBlack"
         android:layout_above="@id/fab"
+        android:importantForAutofill="no"
         android:hint="Descripción" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -40,6 +42,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="25dp"
-        style="@style/Style.FloatingActionButton.Save" />
+        style="@style/Style.FloatingActionButton.EditAlbum" />
 
 </RelativeLayout>

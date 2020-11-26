@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:src="@drawable/ic_album"
+        android:background="@color/colorBlack"
         android:layout_margin="10dp"
         android:layout_above="@id/edtDescripcion"
         android:layout_below="@id/tvTituloPagina"
@@ -29,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:lines="5"
-        android:textColorHint="@color/colorWhite"
+        android:textColorHint="@color/colorBlack"
         android:layout_above="@id/fab"
         android:importantForAutofill="no"
         android:hint="Descripción" />

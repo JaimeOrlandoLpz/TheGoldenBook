@@ -61,4 +61,9 @@
         <item name="android:text">Editar página</item>
     </style>
 
+    <style name="Style.FloatingActionButton.EditAlbum" parent="Style.FloatingActionButton">
+        <item name="icon">@drawable/ic_save</item>
+        <item name="android:text">Editar álbum</item>
+    </style>
+
 </resources>

@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:lines="1"
-        android:textColorHint="@color/colorWhite"
+        android:textColorHint="@color/colorBlack"
         android:layout_above="@id/fab"
         android:hint="Descripción" />
 

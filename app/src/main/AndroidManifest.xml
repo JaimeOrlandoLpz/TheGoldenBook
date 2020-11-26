@@ -78,6 +78,11 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name=".ui.activities.EditarAlbumActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+
+        <activity
             android:name=".ui.activities.VistaPreviaActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
