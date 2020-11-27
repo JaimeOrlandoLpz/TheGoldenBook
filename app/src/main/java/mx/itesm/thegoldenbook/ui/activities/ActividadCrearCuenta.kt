@@ -194,4 +194,18 @@ class ActividadCrearCuenta: AppCompatActivity() {
                 }
             })
     }
+
+    override fun onNavigateUp(): Boolean {
+        val intent = Intent(this, ActividadMenu1::class.java)
+        startActivity(intent)
+
+        return true
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        val intent = Intent(this, ActividadMenu1::class.java)
+        startActivity(intent)
+    }
 }
