@@ -20,20 +20,6 @@ class AlbumsActivity: AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
 
-        val albumList = ArrayList<Album>()
-        /*
-        albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
-        albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
-        albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
-        albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
-        albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
-        albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
-        albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
-        albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
-        albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
-        albumList.add(Album("Roberto Martinez Roman", R.drawable.icono_libro))
-        */
-
         val adapter = AlbumsAdapter(this, object: ItemListener<Album> {
             override fun onItemSelected(view: View, model: Album) {
                 if(view.id == R.id.btnVer || view.id == R.id.cvContainer) {

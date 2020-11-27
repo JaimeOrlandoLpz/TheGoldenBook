@@ -9,33 +9,9 @@
         android:id="@+id/containerTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:gravity="center_horizontal"
+        android:layout_marginTop="100dp"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/cherry_swash"
-            android:text="The Golden Book"
-            android:textAlignment="center"
-            android:textSize="30sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/cherry_swash"
-            android:text="Project"
-            android:textAlignment="center"
-            android:textSize="30sp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="fitCenter"
-            android:layout_margin="10dp"
-            android:contentDescription="@string/app_name"
-            app:srcCompat="@drawable/logo_app" />
 
         <TextView
             android:layout_width="match_parent"
@@ -45,6 +21,14 @@
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="30sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitCenter"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/logo_app" />
 
         <Button
             android:id="@+id/btnLogin"
@@ -75,7 +59,6 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvContacto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Contáctanos"
@@ -83,7 +66,7 @@
             android:layout_margin="10dp" />
 
         <ImageButton
-            android:id="@+id/btn_mail"
+            android:id="@+id/btnEmail"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:scaleType="centerCrop"

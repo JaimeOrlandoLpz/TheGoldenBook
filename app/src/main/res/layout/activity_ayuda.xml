@@ -25,26 +25,59 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:text="Proyecto Desarrollado por Alumnos del Tecnológico de Monterrey"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_marginStart="206dp"
-        android:layout_marginTop="170dp"
-        android:layout_marginEnd="206dp"
+        android:layout_width="283dp"
+        android:layout_height="194dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="118dp"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:srcCompat="@drawable/tec" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine2"
+        android:layout_width="367dp"
+        android:layout_height="186dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="56dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="The Golden Book Project busca mejorar la calidad de vida de las personas con enfermedad de Alzheimer, ejercitando su memoria tanto con la creación como con la lectura de los libros de vida, no obstante, este es solo un ejercicio complementario, para más ayuda e información, les recomendamos acudir a instituciones especializadas como Alzheimer México, I.A.P.®, una fundación sin fines de lucro que busca brindar atención integral a personas con Alzheimer, o demencia similar, a sus familiares y cuidadores."
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="159dp"
+        android:background="@drawable/botonovalo"
+        android:onClick="abrirPaginaAlzheimer"
+        android:text="Mas Informacion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
