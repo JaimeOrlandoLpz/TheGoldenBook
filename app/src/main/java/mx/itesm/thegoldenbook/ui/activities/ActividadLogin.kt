@@ -151,6 +151,16 @@ class ActividadLogin : AppCompatActivity() {
         val email = edtEmail.text.toString()
         val password = edtPassword.text.toString()
 
+        if(email.isEmpty()) {
+            Toast.makeText(this, "El campo correo electrónico no debe estar vacío", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if(password.isEmpty()) {
+            Toast.makeText(this, "El campo contraseña no debe estar vacío", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
                 val currentUser = auth.currentUser
