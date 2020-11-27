@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -33,6 +34,7 @@ class AgregarAlbumActivity: AppCompatActivity() {
     private lateinit var currentUser: Owner
     private lateinit var bitmap: Bitmap
     private var imagenValida = false
+    private var cargandoImagen = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,11 +47,17 @@ class AgregarAlbumActivity: AppCompatActivity() {
         currentUser = Settings.getCurrentUser()!!
 
         ivAlbumImagen.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            val mimeTypes = arrayOf("image/jpeg", "image/png")
-            intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+            if(cargandoImagen) {
+                Toast.makeText(this@AgregarAlbumActivity, "Espere un momento por favor", Toast.LENGTH_SHORT).show()
+            } else {
+                cargandoImagen = true
 
-            startActivityForResult(intent, Constants.REQUEST_IMAGE_GALLERY)
+                val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+                val mimeTypes = arrayOf("image/jpeg", "image/png")
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+
+                startActivityForResult(intent, Constants.REQUEST_IMAGE_GALLERY)
+            }
         }
 
         fab.setOnClickListener {
@@ -59,6 +67,8 @@ class AgregarAlbumActivity: AppCompatActivity() {
                 edtDescripcion.error = "La descripción no puede estar vacía"
             } else {
                 if(imagenValida) {
+                    fab.visibility = View.GONE
+
                     FirebaseRepository.instance.insert(currentUser.uid, Album(
                         "albumId",
                         currentUser.uid,
@@ -93,14 +103,17 @@ class AgregarAlbumActivity: AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode != RESULT_OK) {
+            cargandoImagen = false
             return
         }
 
         if (requestCode != Constants.REQUEST_IMAGE_GALLERY) {
+            cargandoImagen = false
             return
         }
 
         if(data == null) {
+            cargandoImagen = false
             return
         }
 
@@ -122,6 +135,7 @@ class AgregarAlbumActivity: AppCompatActivity() {
             imagenValida = true
         } catch (ex: Exception) {
             imagenValida = false
+            cargandoImagen = false
             Utils.print("Error al cargar imagen: $ex")
         }
     }

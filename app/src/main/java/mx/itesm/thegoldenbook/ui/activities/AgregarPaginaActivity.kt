@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
@@ -74,6 +75,8 @@ class AgregarPaginaActivity: AppCompatActivity() {
                 edtDescripcion.error = "La descripción no puede estar vacía"
             } else {
                 if(imagenValida) {
+                    fab.visibility = View.GONE
+
                     val paginaId = "paginaId"
                     val rutaImagen = "rutaImagen"
                     val fechaCreacion = System.currentTimeMillis()
